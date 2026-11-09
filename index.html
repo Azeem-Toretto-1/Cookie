@@ -58,6 +58,10 @@
             </li>
 
             <li>
+              <a href="#box-builder" class="nav_link">Box Builder</a>
+            </li>
+
+            <li>
               <a href="#contact" class="nav_link">Contact us</a>
             </li>
           </ul>
@@ -492,6 +496,101 @@
         </div>
       </section>
 
+      <!--==================== CUSTOM COOKIE BOX BUILDER ====================-->
+      <section class="box-builder section" id="box-builder">
+        <span class="section_subtitle">Craft your box</span>
+        <h2 class="section_title">Build Your Own Cookie Box</h2>
+
+        <div class="box_builder-container container">
+          <p class="box_builder-description">
+            Customize a freshly baked cookie gift box. Choose your desired size, mix and match your favorite flavors, and watch your assortment come to life!
+          </p>
+
+          <!-- Step 1: Choose Box Size -->
+          <div class="box_step-block">
+            <div class="box_step-header">
+              <span class="box_step-number">1</span>
+              <h3 class="box_step-title">Select Box Size</h3>
+            </div>
+
+            <div class="box_sizes-grid">
+              <button type="button" class="box_size-card" data-box-size="4" data-box-price="22.99">
+                <span class="box_size-badge">Snack Box</span>
+                <h4 class="box_size-count">4 Cookies</h4>
+                <span class="box_size-price">$ 22.99</span>
+                <p class="box_size-info">Perfect solo delight or sweet gesture</p>
+              </button>
+
+              <button type="button" class="box_size-card active" data-box-size="6" data-box-price="32.99">
+                <span class="box_size-badge">Most Popular</span>
+                <h4 class="box_size-count">6 Cookies</h4>
+                <span class="box_size-price">$ 32.99</span>
+                <p class="box_size-info">Ideal to share with family & friends</p>
+              </button>
+
+              <button type="button" class="box_size-card" data-box-size="12" data-box-price="58.99">
+                <span class="box_size-badge">Best Value - Save 15%</span>
+                <h4 class="box_size-count">12 Cookies</h4>
+                <span class="box_size-price">$ 58.99</span>
+                <p class="box_size-info">Party & gathering favorite with all flavors</p>
+              </button>
+            </div>
+          </div>
+
+          <!-- Visual Box Display -->
+          <div class="box_visual-card">
+            <div class="box_visual-top">
+              <div class="box_visual-summary">
+                <i class="ri-gift-line box_visual-icon"></i>
+                <div>
+                  <h4 class="box_visual-heading">Your Custom Box</h4>
+                  <span class="box_visual-sub" id="box-capacity-label">Capacity: 6 Cookies</span>
+                </div>
+              </div>
+
+              <div class="box_counter-pill">
+                <span id="box-selected-count">0</span> / <span id="box-max-count">6</span> cookies selected
+                <span class="box_remaining-badge" id="box-remaining-badge">6 slots left</span>
+              </div>
+            </div>
+
+            <div class="box_meter">
+              <div class="box_meter-fill" id="box-meter-fill" style="width: 0%;"></div>
+            </div>
+
+            <!-- Dynamic cookie slots -->
+            <div class="box_slots-container" id="box-slots-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Step 2: Choose Flavours -->
+          <div class="box_step-block">
+            <div class="box_step-header">
+              <span class="box_step-number">2</span>
+              <h3 class="box_step-title">Select Flavours</h3>
+            </div>
+
+            <div class="box_flavors-grid" id="box-flavors-grid">
+              <!-- Flavors populated dynamically from PRODUCTS_DATA -->
+            </div>
+          </div>
+
+          <!-- Step 3: Box Summary & Add to Cart -->
+          <div class="box_summary-bar">
+            <div class="box_summary-info">
+              <span class="box_summary-label">Total Box Price:</span>
+              <span class="box_summary-total" id="box-summary-price">$ 32.99</span>
+              <span class="box_summary-hint" id="box-summary-hint">Please select 6 cookies to add to cart</span>
+            </div>
+
+            <button type="button" class="button box_add-btn" id="box-add-cart-btn" disabled>
+              Add Custom Box to Cart <i class="ri-shopping-bag-3-line"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
       <!--==================== CONTACT SECTION ====================-->
       <section class="contact section" id="contact">
         <span class="section_subtitle">We’re here for you</span>
@@ -605,6 +704,7 @@
               <a href="#featured" class="footer_link">Featured</a>
               <a href="#about" class="footer_link">About Us</a>
               <a href="#products" class="footer_link">Products</a>
+              <a href="#box-builder" class="footer_link">Box Builder</a>
             </div>
           </div>
 
