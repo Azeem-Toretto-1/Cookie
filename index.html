@@ -102,6 +102,11 @@
 
         <!-- Header Actions -->
         <div class="nav_actions">
+          <button class="nav_action-btn" id="wishlist-btn" aria-label="View wishlist" title="Wishlist">
+            <i class="ri-heart-line"></i>
+            <span class="nav_badge" id="wishlist-badge">0</span>
+          </button>
+
           <button class="nav_action-btn" id="cart-btn" aria-label="View shopping cart" title="Cart">
             <i class="ri-shopping-bag-3-line"></i>
             <span class="nav_badge" id="cart-badge">0</span>
@@ -755,6 +760,37 @@
             Proceed to Checkout <i class="ri-arrow-right-line"></i>
           </button>
         </div>
+      </aside>
+    </div>
+
+    <!--==================== WISHLIST DRAWER ====================-->
+    <div class="drawer" id="wishlist-drawer" aria-hidden="true">
+      <div class="drawer_overlay" id="wishlist-overlay"></div>
+      <aside class="drawer_panel">
+        <div class="drawer_header">
+          <div class="drawer_title-group">
+            <h2 class="drawer_title"><i class="ri-heart-fill"></i> Wishlist</h2>
+            <span class="drawer_count-pill" id="wishlist-drawer-count">0 items</span>
+          </div>
+          <button class="drawer_close" id="wishlist-close" aria-label="Close wishlist">
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+
+        <!-- Empty state -->
+        <div class="drawer_empty" id="wishlist-empty">
+          <div class="drawer_empty-icon">
+            <i class="ri-heart-line"></i>
+          </div>
+          <h3 class="drawer_empty-title">Your wishlist is empty</h3>
+          <p class="drawer_empty-desc">Save your favorite cookies to revisit anytime and order when you crave them most.</p>
+          <a href="#products" class="button drawer_empty-btn" id="wishlist-empty-shop">
+            Browse Cookies <i class="ri-arrow-right-line"></i>
+          </a>
+        </div>
+
+        <!-- Wishlist items list -->
+        <div class="drawer_items" id="wishlist-items"></div>
       </aside>
     </div>
 
