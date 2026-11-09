@@ -1209,7 +1209,7 @@ if (wishlistEmptyShopBtn) {
 /*=============== 8. CUSTOM COOKIE BOX BUILDER ===============*/
 const boxBuilderState = {
   size: 6,
-  price: 32.99,
+  price: 0,
   selections: {},
 };
 
@@ -1229,12 +1229,25 @@ const getTotalBoxSelected = () => {
   return Object.values(boxBuilderState.selections).reduce((a, b) => a + b, 0);
 };
 
+const calculateBoxPrice = () => {
+  let subtotal = 0;
+  Object.entries(boxBuilderState.selections).forEach(([prodId, count]) => {
+    const prod = getProductById(prodId);
+    if (prod && count > 0) {
+      subtotal += prod.price * count;
+    }
+  });
+  return subtotal;
+};
+
 const renderBoxBuilder = () => {
   if (!boxSlotsContainer || !boxFlavorsGrid) return;
 
   const totalSelected = getTotalBoxSelected();
   const maxCapacity = boxBuilderState.size;
   const remaining = maxCapacity - totalSelected;
+
+  boxBuilderState.price = calculateBoxPrice();
 
   if (boxSelectedCountEl) boxSelectedCountEl.textContent = totalSelected;
   if (boxMaxCountEl) boxMaxCountEl.textContent = maxCapacity;
@@ -1296,7 +1309,7 @@ const renderBoxBuilder = () => {
         <img src="${prod.image}" alt="${prod.name}" class="box_flavor-img">
         <div>
           <h4 class="box_flavor-name">${prod.shortName}</h4>
-          <span class="box_flavor-price">$ ${prod.price.toFixed(2)} value</span>
+          <span class="box_flavor-price">$ ${prod.price.toFixed(2)} each</span>
         </div>
       </div>
       <div class="box_flavor-stepper">
@@ -1333,13 +1346,10 @@ if (boxSizesGrid) {
     if (!btn) return;
 
     const newSize = parseInt(btn.dataset.boxSize, 10);
-    const newPrice = parseFloat(btn.dataset.boxPrice);
-
     boxSizesGrid.querySelectorAll(".box_size-card").forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
 
     boxBuilderState.size = newSize;
-    boxBuilderState.price = newPrice;
 
     let total = getTotalBoxSelected();
     if (total > newSize) {
@@ -1348,6 +1358,9 @@ if (boxSizesGrid) {
         while (boxBuilderState.selections[k] > 0 && total > newSize) {
           boxBuilderState.selections[k]--;
           total--;
+        }
+        if (boxBuilderState.selections[k] === 0) {
+          delete boxBuilderState.selections[k];
         }
       }
     }
@@ -1406,6 +1419,8 @@ if (boxAddCartBtn) {
     const totalSelected = getTotalBoxSelected();
     if (totalSelected !== boxBuilderState.size) return;
 
+    const calculatedPrice = calculateBoxPrice();
+
     const flavorParts = [];
     Object.entries(boxBuilderState.selections).forEach(([prodId, count]) => {
       const p = getProductById(prodId);
@@ -1419,13 +1434,14 @@ if (boxAddCartBtn) {
 
     addToCart(null, 1, {
       size: boxBuilderState.size,
-      price: boxBuilderState.price,
+      price: calculatedPrice,
       details: details,
+      selections: { ...boxBuilderState.selections },
     });
 
     showToast({
       title: `Custom Box (${boxBuilderState.size} Cookies)`,
-      message: "Added to your shopping cart!",
+      message: `$ ${calculatedPrice.toFixed(2)} - Added to your cart!`,
       image: "./assets/img/home-bag.png",
     });
 
