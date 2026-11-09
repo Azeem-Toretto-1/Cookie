@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Note: Update with your live production URL upon final hosting deployment
+# Sitemap: https://your-production-domain.com/sitemap.xml
+
