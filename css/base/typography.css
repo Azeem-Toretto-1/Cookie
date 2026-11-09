@@ -1,0 +1,21 @@
+/*=============== GOOGLE FONTS & TYPOGRAPHY ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=DM+Sans:wght@400;500;600&display=swap");
+
+body,
+input,
+button,
+textarea {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--title-color);
+  font-family: var(--second-font);
+  font-weight: var(--font-regular);
+  line-height: 100%;
+}
+

@@ -1,0 +1,33 @@
+/*=============== COOKIE SHOP - MAIN STYLESHEET (css/style.css) ===============*/
+
+/* Base & Core */
+@import "./base/variables.css";
+@import "./base/typography.css";
+@import "./base/reset.css";
+
+/* Layout */
+@import "./layout/header.css";
+@import "./layout/navigation.css";
+@import "./layout/footer.css";
+
+/* Components */
+@import "./components/buttons.css";
+@import "./components/cards.css";
+@import "./components/modals.css";
+@import "./components/cart.css";
+@import "./components/wishlist.css";
+@import "./components/forms.css";
+@import "./components/toast.css";
+@import "./components/confetti.css";
+
+/* Sections */
+@import "./sections/home.css";
+@import "./sections/featured.css";
+@import "./sections/about.css";
+@import "./sections/products.css";
+@import "./sections/box-builder.css";
+@import "./sections/contact.css";
+
+/* Responsive Breakpoints */
+@import "./responsive.css";
+

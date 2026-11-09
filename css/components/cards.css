@@ -1,0 +1,15 @@
+/*=============== CARDS BASE ===============*/
+.card-base {
+  background-color: var(--container-color);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px hsla(38, 60%, 15%, 0.1);
+  transition:
+    translate 0.4s,
+    box-shadow 0.4s;
+}
+
+.card-base:hover {
+  translate: 0 -0.5rem;
+  box-shadow: 0 12px 32px hsla(342, 61%, 30%, 0.15);
+}
+

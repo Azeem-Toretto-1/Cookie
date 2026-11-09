@@ -1,0 +1,111 @@
+/*=============== PRODUCTS SECTION ===============*/
+.products_container {
+  padding-top: 0.5rem;
+}
+
+.products_content {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem 1rem;
+  margin-bottom: 3rem;
+}
+
+.products_card {
+  position: relative;
+  background-color: var(--container-color);
+  padding: 1rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px hsla(38, 60%, 15%, 0.1);
+  cursor: pointer;
+  transition:
+    translate 0.4s,
+    box-shadow 0.4s;
+}
+
+.products_card-top {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+}
+
+.products_quick-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--first-color-lighten);
+  color: var(--first-color);
+  font-size: 1.15rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    transform 0.2s;
+}
+
+.products_quick-btn:hover {
+  background-color: var(--first-color);
+  color: var(--first-color-lighten);
+  transform: scale(1.1);
+}
+
+.products_img {
+  margin-bottom: 1rem;
+  transition: rotate 0.4s;
+}
+
+.products_card:hover {
+  translate: 0 -0.5rem;
+  box-shadow: 0 12px 32px hsla(342, 61%, 30%, 0.15);
+}
+
+.products_card:hover .products_img {
+  rotate: 30deg;
+}
+
+.products_name {
+  font-size: var(--h3-font-size);
+  margin-bottom: 0.5rem;
+}
+
+.products_data {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.products_price {
+  font: var(--font-regular) var(--h3-font-size) var(--second-font);
+  color: var(--first-color);
+}
+
+.products_add {
+  width: 32px;
+  height: 32px;
+  background-color: var(--first-color);
+  color: var(--first-color-lighten);
+  font-size: 1.5rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color 0.4s;
+}
+
+.products_add:hover {
+  background-color: var(--first-color-alt);
+}
+
+.products_more {
+  width: 100%;
+  justify-content: center;
+}
+
+.products_more:disabled,
+.products_more[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+

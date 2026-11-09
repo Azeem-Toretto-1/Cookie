@@ -1,0 +1,117 @@
+/*=============== BASE RESET & UTILITIES ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--body-color);
+  color: var(--text-color);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+input,
+button {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1120px;
+  margin-inline: 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.section {
+  padding-block: 5rem 1rem;
+}
+
+.section_title {
+  text-align: center;
+  font-size: var(--bigger-font-size);
+  line-height: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.section_subtitle {
+  display: block;
+  text-align: center;
+  font-size: var(--small-font-size);
+  color: var(--first-color);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.main {
+  overflow: hidden;
+}
+
+/*=============== SCROLL BAR ===============*/
+::-webkit-scrollbar {
+  width: 0.6rem;
+  background-color: hsl(38, 61%, 85%);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: hsl(38, 35%, 70%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(38, 35%, 60%);
+}
+
+/*=============== SCROLL UP ===============*/
+.scrollup {
+  position: fixed;
+  right: 1rem;
+  bottom: -50%;
+  z-index: var(--z-tooltip);
+  background-color: var(--body-color);
+  box-shadow: 0 4px 16px hsla(38, 60%, 15%, 0.1);
+  color: var(--title-color);
+  display: inline-flex;
+  padding: 6px;
+  font-size: 1.25rem;
+  border-radius: 0.5rem;
+  transition:
+    bottom 0.4s,
+    transform 0.4s;
+}
+
+.scrollup:hover {
+  transform: translateY(-0.5rem);
+}
+
+.show-scroll {
+  bottom: 3rem;
+}
+

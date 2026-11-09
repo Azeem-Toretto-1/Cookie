@@ -1,0 +1,40 @@
+/*=============== BUTTONS ===============*/
+.button {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  background-color: var(--first-color);
+  color: var(--first-color-lighten);
+  font-weight: var(--font-semi-bold);
+  padding: 1rem 1.5rem;
+  border-radius: 4rem;
+  transition:
+    background-color 0.4s,
+    color 0.4s;
+}
+
+.button i {
+  font-size: 1.25rem;
+  font-weight: initial;
+  transition: transform 0.4s;
+}
+
+.button:hover {
+  background-color: var(--first-color-alt);
+}
+
+.button:hover .ri-arrow-right-line {
+  transform: translateX(0.5rem);
+}
+
+.button-ghost {
+  background-color: transparent;
+  color: var(--first-color);
+  border: 2px solid var(--first-color);
+}
+
+.button-ghost:hover {
+  background-color: var(--first-color);
+  color: var(--first-color-lighten);
+}
+

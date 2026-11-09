@@ -1,0 +1,22 @@
+/*=============== WISHLIST SPECIFIC ===============*/
+.wishlist_item-add {
+  align-self: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--first-color);
+  color: var(--first-color-lighten);
+  font-size: 1.15rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
+}
+
+.wishlist_item-add:hover {
+  background-color: var(--first-color-alt);
+  transform: scale(1.1);
+}
+

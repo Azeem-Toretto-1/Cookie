@@ -1,0 +1,311 @@
+/*=============== FORMS & CHECKOUT COMPONENTS ===============*/
+.modal_container--checkout {
+  max-width: 860px;
+}
+
+.checkout_wrapper {
+  display: grid;
+  row-gap: 2rem;
+}
+
+.checkout_subtitle {
+  font-size: var(--small-font-size);
+  color: var(--text-color-light);
+  margin-bottom: 1.5rem;
+}
+
+.checkout_form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form_row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+.form_group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.85rem;
+}
+
+.form_label {
+  font-size: var(--small-font-size);
+  font-weight: var(--font-medium);
+  color: var(--title-color);
+  margin-bottom: 0.35rem;
+}
+
+.form_input,
+.form_textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 0.85rem;
+  border: 2px solid var(--first-color-lighten);
+  background-color: var(--body-color);
+  color: var(--title-color);
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s,
+    background-color 0.3s;
+}
+
+.form_input:focus,
+.form_textarea:focus {
+  border-color: var(--first-color);
+  box-shadow: 0 0 0 3px hsla(342, 61%, 30%, 0.15);
+}
+
+.form_input.input-error,
+.form_textarea.input-error {
+  border-color: #d32f2f;
+}
+
+.form_textarea {
+  resize: vertical;
+  min-height: 75px;
+}
+
+/* Autofill fixes */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--body-color) inset !important;
+  -webkit-text-fill-color: var(--title-color) !important;
+  caret-color: var(--title-color) !important;
+  border-color: var(--first-color) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:autofill,
+textarea:autofill {
+  background-color: var(--body-color) !important;
+  color: var(--title-color) !important;
+  border-color: var(--first-color) !important;
+  filter: none;
+}
+
+.form_error {
+  font-size: var(--smaller-font-size);
+  color: #d32f2f;
+  margin-top: 0.25rem;
+  min-height: 1rem;
+  display: block;
+}
+
+.checkout_notice {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  background-color: var(--first-color-lighten);
+  color: var(--first-color);
+  font-size: var(--smaller-font-size);
+  padding: 0.75rem 1rem;
+  border-radius: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.checkout_notice i {
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+.checkout_submit-btn {
+  width: 100%;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Checkout Summary Column */
+.checkout_summary-col {
+  background-color: var(--body-color);
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout_summary-title {
+  font-size: var(--h2-font-size);
+  margin-bottom: 1rem;
+  color: var(--title-color);
+}
+
+.checkout_summary-items {
+  max-height: 240px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-right: 0.25rem;
+}
+
+.checkout_summary-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--small-font-size);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--first-color-lighten);
+}
+
+.checkout_summary-item-name {
+  font-weight: var(--font-medium);
+  color: var(--title-color);
+}
+
+.checkout_summary-item-price {
+  font-weight: var(--font-semi-bold);
+  color: var(--first-color);
+}
+
+.checkout_summary-totals {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--first-color-lighten);
+}
+
+.summary_row {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--normal-font-size);
+  margin-bottom: 0.5rem;
+}
+
+.summary_free {
+  color: var(--first-color);
+  font-weight: var(--font-semi-bold);
+}
+
+.summary_total {
+  font-size: var(--h3-font-size);
+  font-family: var(--second-font);
+  color: var(--title-color);
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--first-color-lighten);
+}
+
+.summary_total span:last-child {
+  color: var(--first-color);
+}
+
+/* Order Confirmation Modal */
+.modal_container--confirm {
+  max-width: 580px;
+  text-align: center;
+}
+
+.order_confirm-content {
+  padding: 1rem 0.5rem;
+}
+
+.order_confirm-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: var(--first-color);
+  color: var(--first-color-lighten);
+  font-size: 2.25rem;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 1.25rem;
+}
+
+.order_confirm-lead {
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+.order_details-card {
+  background-color: var(--body-color);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  text-align: left;
+  margin-bottom: 1.25rem;
+}
+
+.order_meta-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--first-color-lighten);
+}
+
+.order_label {
+  font-size: var(--smaller-font-size);
+  color: var(--text-color-light);
+  display: block;
+}
+
+.order_value {
+  font-size: var(--small-font-size);
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+}
+
+.order_items-title {
+  font-size: var(--small-font-size);
+  color: var(--title-color);
+  margin-bottom: 0.5rem;
+}
+
+.order_items-list {
+  max-height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.order_item-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--smaller-font-size);
+  color: var(--text-color);
+}
+
+.order_total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--normal-font-size);
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--first-color-lighten);
+}
+
+.order_total-row strong {
+  font: var(--font-regular) var(--h2-font-size) var(--second-font);
+  color: var(--first-color);
+}
+
+.order_simulation-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 0.5rem;
+  font-size: var(--smaller-font-size);
+  color: var(--text-color-light);
+  margin-bottom: 1.5rem;
+}
+
+.order_continue-btn {
+  width: 100%;
+  justify-content: center;
+  cursor: pointer;
+}
+
