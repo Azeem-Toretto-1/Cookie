@@ -1619,6 +1619,42 @@ img {
 }
 
 /*=============== MODALS BASE & QUICK VIEW ===============*/
+/* Hide scrollbars across all modals, drawers, and panels while preserving scrolling */
+.modal,
+.modal_container,
+.quickview_modal,
+.drawer,
+.drawer_items,
+.cart_drawer,
+.wishlist_drawer,
+.checkout_modal,
+.checkout_wrapper,
+.checkout_summary-items,
+.order_confirm-modal,
+.order_items-list,
+.box_slots-container {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE & Edge */
+}
+
+.modal::-webkit-scrollbar,
+.modal_container::-webkit-scrollbar,
+.quickview_modal::-webkit-scrollbar,
+.drawer::-webkit-scrollbar,
+.drawer_items::-webkit-scrollbar,
+.cart_drawer::-webkit-scrollbar,
+.wishlist_drawer::-webkit-scrollbar,
+.checkout_modal::-webkit-scrollbar,
+.checkout_wrapper::-webkit-scrollbar,
+.checkout_summary-items::-webkit-scrollbar,
+.order_confirm-modal::-webkit-scrollbar,
+.order_items-list::-webkit-scrollbar,
+.box_slots-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+  width: 0;
+  height: 0;
+}
+
 .modal {
   position: fixed;
   inset: 0;
