@@ -8,12 +8,29 @@ import { PRODUCTS_DATA, getProductById } from "./data/products.js";
 import { initNavigation } from "./modules/navigation.js";
 import { initAnimations } from "./modules/animations.js";
 import { initPhysics } from "./modules/physics.js";
-import { initQuickView, openQuickView, closeQuickView } from "./modules/quick-view.js";
-import { initCart, addToCart, triggerFlyToCart, updateCartBadge, closeCart } from "./modules/cart.js";
-import { initWishlist, updateWishlistBadge, closeWishlist } from "./modules/wishlist.js";
+import {
+  initQuickView,
+  openQuickView,
+  closeQuickView,
+} from "./modules/quick-view.js";
+import {
+  initCart,
+  addToCart,
+  triggerFlyToCart,
+  updateCartBadge,
+  closeCart,
+} from "./modules/cart.js";
+import {
+  initWishlist,
+  updateWishlistBadge,
+  closeWishlist,
+} from "./modules/wishlist.js";
 import { initBoxBuilder, renderBoxBuilder } from "./modules/box-builder.js";
 import { initCheckout, closeCheckout } from "./modules/checkout.js";
-import { initOrderSummary, closeOrderConfirmation } from "./modules/order-summary.js";
+import {
+  initOrderSummary,
+  closeOrderConfirmation,
+} from "./modules/order-summary.js";
 import { showToast } from "./modules/toast.js";
 
 // Global Escape key listener to dismiss active modals & drawers
@@ -95,4 +112,3 @@ document.addEventListener("DOMContentLoaded", () => {
 if (typeof window !== "undefined") {
   window.PRODUCTS_DATA = PRODUCTS_DATA;
 }
-

@@ -6,10 +6,7 @@
     <title>Cookie | Freshly Baked Artisan Cookies</title>
 
     <!--=============== PRIMARY META TAGS ===============-->
-    <meta
-      name="title"
-      content="Cookie | Freshly Baked Artisan Cookies"
-    />
+    <meta name="title" content="Cookie | Freshly Baked Artisan Cookies" />
     <meta
       name="description"
       content="Handcrafted artisan cookies baked fresh every morning with real, top-quality ingredients in Lima. Explore classic chocolate, custom gift boxes, and order online."
@@ -65,44 +62,41 @@
 
     <!--=============== STRUCTURED DATA (JSON-LD SCHEMA) ===============-->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Bakery",
-      "name": "Cookie",
-      "image": "./assets/img/home-bag.png",
-      "logo": "./assets/img/favicon.png",
-      "description": "Handcrafted artisan cookies baked fresh every morning with authentic ingredients in Lima.",
-      "telephone": "+51987654321",
-      "email": "hola@cookie.pe",
-      "priceRange": "$$",
-      "servesCuisine": "Bakery",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Av. Spain 1234",
-        "addressLocality": "Lima",
-        "addressRegion": "Lima",
-        "addressCountry": "PE"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"
-          ],
-          "opens": "08:00",
-          "closes": "20:00"
-        }
-      ],
-      "sameAs": [
-        "https://www.instagram.com/",
-        "https://www.facebook.com/"
-      ]
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "Bakery",
+        "name": "Cookie",
+        "image": "./assets/img/home-bag.png",
+        "logo": "./assets/img/favicon.png",
+        "description": "Handcrafted artisan cookies baked fresh every morning with authentic ingredients in Lima.",
+        "telephone": "+51987654321",
+        "email": "hola@cookie.pe",
+        "priceRange": "$$",
+        "servesCuisine": "Bakery",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Spain 1234",
+          "addressLocality": "Lima",
+          "addressRegion": "Lima",
+          "addressCountry": "PE"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "20:00"
+          }
+        ],
+        "sameAs": ["https://www.instagram.com/", "https://www.facebook.com/"]
+      }
     </script>
   </head>
   <body>
@@ -146,7 +140,8 @@
 
           <div class="nav_data">
             <a href="#products" class="button nav_button">
-              Order now <i class="ri-shopping-bag-3-line" aria-hidden="true"></i>
+              Order now
+              <i class="ri-shopping-bag-3-line" aria-hidden="true"></i>
             </a>
 
             <div class="nav_social">
@@ -190,12 +185,22 @@
 
         <!-- Header Actions -->
         <div class="nav_actions">
-          <button class="nav_action-btn" id="wishlist-btn" aria-label="View wishlist" title="Wishlist">
+          <button
+            class="nav_action-btn"
+            id="wishlist-btn"
+            aria-label="View wishlist"
+            title="Wishlist"
+          >
             <i class="ri-heart-line" aria-hidden="true"></i>
             <span class="nav_badge" id="wishlist-badge">0</span>
           </button>
 
-          <button class="nav_action-btn" id="cart-btn" aria-label="View shopping cart" title="Cart">
+          <button
+            class="nav_action-btn"
+            id="cart-btn"
+            aria-label="View shopping cart"
+            title="Cart"
+          >
             <i class="ri-shopping-bag-3-line" aria-hidden="true"></i>
             <span class="nav_badge" id="cart-badge">0</span>
           </button>
@@ -319,8 +324,13 @@
             <div class="featured_data">
               <span class="featured_price">$ 5.99</span>
 
-              <button class="button featured_button" data-product-id="cookie-classic" aria-label="Quick View for Classic chocolate">
-                Quick View <i class="ri-arrow-right-up-line" aria-hidden="true"></i>
+              <button
+                class="button featured_button"
+                data-product-id="cookie-classic"
+                aria-label="Quick View for Classic chocolate"
+              >
+                Quick View
+                <i class="ri-arrow-right-up-line" aria-hidden="true"></i>
               </button>
             </div>
           </article>
@@ -346,8 +356,13 @@
             <div class="featured_data">
               <span class="featured_price">$ 9.99</span>
 
-              <button class="button featured_button" data-product-id="cookie-double-choco" aria-label="Quick View for Double chocolate">
-                Quick View <i class="ri-arrow-right-up-line" aria-hidden="true"></i>
+              <button
+                class="button featured_button"
+                data-product-id="cookie-double-choco"
+                aria-label="Quick View for Double chocolate"
+              >
+                Quick View
+                <i class="ri-arrow-right-up-line" aria-hidden="true"></i>
               </button>
             </div>
           </article>
@@ -373,8 +388,13 @@
             <div class="featured_data">
               <span class="featured_price">$ 12.99</span>
 
-              <button class="button featured_button" data-product-id="cookie-red-velvet" aria-label="Quick View for Red velvet">
-                Quick View <i class="ri-arrow-right-up-line" aria-hidden="true"></i>
+              <button
+                class="button featured_button"
+                data-product-id="cookie-red-velvet"
+                aria-label="Quick View for Red velvet"
+              >
+                Quick View
+                <i class="ri-arrow-right-up-line" aria-hidden="true"></i>
               </button>
             </div>
           </article>
@@ -451,7 +471,12 @@
           <div class="products_content grid" id="products-content">
             <article class="products_card" data-product-id="cookie-classic">
               <div class="products_card-top">
-                <button class="products_quick-btn" data-product-id="cookie-classic" title="Quick View" aria-label="Quick View for Classic">
+                <button
+                  class="products_quick-btn"
+                  data-product-id="cookie-classic"
+                  title="Quick View"
+                  aria-label="Quick View for Classic"
+                >
                   <i class="ri-eye-line" aria-hidden="true"></i>
                 </button>
               </div>
@@ -466,20 +491,34 @@
                 height="200"
               />
 
-              <h3 class="products_name" data-product-id="cookie-classic">Classic</h3>
+              <h3 class="products_name" data-product-id="cookie-classic">
+                Classic
+              </h3>
 
               <div class="products_data">
                 <span class="products_price">$ 5.99</span>
 
-                <button class="products_add" data-product-id="cookie-classic" aria-label="Add to cart">
+                <button
+                  class="products_add"
+                  data-product-id="cookie-classic"
+                  aria-label="Add to cart"
+                >
                   <i class="ri-add-line" aria-hidden="true"></i>
                 </button>
               </div>
             </article>
 
-            <article class="products_card" data-product-id="cookie-double-choco">
+            <article
+              class="products_card"
+              data-product-id="cookie-double-choco"
+            >
               <div class="products_card-top">
-                <button class="products_quick-btn" data-product-id="cookie-double-choco" title="Quick View" aria-label="Quick View for Double choco">
+                <button
+                  class="products_quick-btn"
+                  data-product-id="cookie-double-choco"
+                  title="Quick View"
+                  aria-label="Quick View for Double choco"
+                >
                   <i class="ri-eye-line" aria-hidden="true"></i>
                 </button>
               </div>
@@ -494,12 +533,18 @@
                 height="200"
               />
 
-              <h3 class="products_name" data-product-id="cookie-double-choco">Double choco</h3>
+              <h3 class="products_name" data-product-id="cookie-double-choco">
+                Double choco
+              </h3>
 
               <div class="products_data">
                 <span class="products_price">$ 9.99</span>
 
-                <button class="products_add" data-product-id="cookie-double-choco" aria-label="Add to cart">
+                <button
+                  class="products_add"
+                  data-product-id="cookie-double-choco"
+                  aria-label="Add to cart"
+                >
                   <i class="ri-add-line" aria-hidden="true"></i>
                 </button>
               </div>
@@ -507,7 +552,12 @@
 
             <article class="products_card" data-product-id="cookie-red-velvet">
               <div class="products_card-top">
-                <button class="products_quick-btn" data-product-id="cookie-red-velvet" title="Quick View" aria-label="Quick View for Red velvet">
+                <button
+                  class="products_quick-btn"
+                  data-product-id="cookie-red-velvet"
+                  title="Quick View"
+                  aria-label="Quick View for Red velvet"
+                >
                   <i class="ri-eye-line" aria-hidden="true"></i>
                 </button>
               </div>
@@ -522,20 +572,34 @@
                 height="200"
               />
 
-              <h3 class="products_name" data-product-id="cookie-red-velvet">Red velvet</h3>
+              <h3 class="products_name" data-product-id="cookie-red-velvet">
+                Red velvet
+              </h3>
 
               <div class="products_data">
                 <span class="products_price">$ 12.99</span>
 
-                <button class="products_add" data-product-id="cookie-red-velvet" aria-label="Add to cart">
+                <button
+                  class="products_add"
+                  data-product-id="cookie-red-velvet"
+                  aria-label="Add to cart"
+                >
                   <i class="ri-add-line" aria-hidden="true"></i>
                 </button>
               </div>
             </article>
 
-            <article class="products_card" data-product-id="cookie-oats-raisins">
+            <article
+              class="products_card"
+              data-product-id="cookie-oats-raisins"
+            >
               <div class="products_card-top">
-                <button class="products_quick-btn" data-product-id="cookie-oats-raisins" title="Quick View" aria-label="Quick View for Oats and raisins">
+                <button
+                  class="products_quick-btn"
+                  data-product-id="cookie-oats-raisins"
+                  title="Quick View"
+                  aria-label="Quick View for Oats and raisins"
+                >
                   <i class="ri-eye-line" aria-hidden="true"></i>
                 </button>
               </div>
@@ -550,12 +614,18 @@
                 height="200"
               />
 
-              <h3 class="products_name" data-product-id="cookie-oats-raisins">Oats and raisins</h3>
+              <h3 class="products_name" data-product-id="cookie-oats-raisins">
+                Oats and raisins
+              </h3>
 
               <div class="products_data">
                 <span class="products_price">$ 6.99</span>
 
-                <button class="products_add" data-product-id="cookie-oats-raisins" aria-label="Add to cart">
+                <button
+                  class="products_add"
+                  data-product-id="cookie-oats-raisins"
+                  aria-label="Add to cart"
+                >
                   <i class="ri-add-line" aria-hidden="true"></i>
                 </button>
               </div>
@@ -563,7 +633,12 @@
 
             <article class="products_card" data-product-id="cookie-peanuts">
               <div class="products_card-top">
-                <button class="products_quick-btn" data-product-id="cookie-peanuts" title="Quick View" aria-label="Quick View for Peanuts">
+                <button
+                  class="products_quick-btn"
+                  data-product-id="cookie-peanuts"
+                  title="Quick View"
+                  aria-label="Quick View for Peanuts"
+                >
                   <i class="ri-eye-line" aria-hidden="true"></i>
                 </button>
               </div>
@@ -578,20 +653,34 @@
                 height="200"
               />
 
-              <h3 class="products_name" data-product-id="cookie-peanuts">Peanuts</h3>
+              <h3 class="products_name" data-product-id="cookie-peanuts">
+                Peanuts
+              </h3>
 
               <div class="products_data">
                 <span class="products_price">$ 4.99</span>
 
-                <button class="products_add" data-product-id="cookie-peanuts" aria-label="Add to cart">
+                <button
+                  class="products_add"
+                  data-product-id="cookie-peanuts"
+                  aria-label="Add to cart"
+                >
                   <i class="ri-add-line" aria-hidden="true"></i>
                 </button>
               </div>
             </article>
 
-            <article class="products_card" data-product-id="cookie-white-matcha">
+            <article
+              class="products_card"
+              data-product-id="cookie-white-matcha"
+            >
               <div class="products_card-top">
-                <button class="products_quick-btn" data-product-id="cookie-white-matcha" title="Quick View" aria-label="Quick View for White matcha">
+                <button
+                  class="products_quick-btn"
+                  data-product-id="cookie-white-matcha"
+                  title="Quick View"
+                  aria-label="Quick View for White matcha"
+                >
                   <i class="ri-eye-line" aria-hidden="true"></i>
                 </button>
               </div>
@@ -606,12 +695,18 @@
                 height="200"
               />
 
-              <h3 class="products_name" data-product-id="cookie-white-matcha">White matcha</h3>
+              <h3 class="products_name" data-product-id="cookie-white-matcha">
+                White matcha
+              </h3>
 
               <div class="products_data">
                 <span class="products_price">$ 13.99</span>
 
-                <button class="products_add" data-product-id="cookie-white-matcha" aria-label="Add to cart">
+                <button
+                  class="products_add"
+                  data-product-id="cookie-white-matcha"
+                  aria-label="Add to cart"
+                >
                   <i class="ri-add-line" aria-hidden="true"></i>
                 </button>
               </div>
@@ -627,7 +722,9 @@
 
         <div class="box_builder-container container">
           <p class="box_builder-description">
-            Customize a freshly baked cookie gift box. Choose your desired size, mix and match your favorite flavors, and watch your assortment come to life!
+            Customize a freshly baked cookie gift box. Choose your desired size,
+            mix and match your favorite flavors, and watch your assortment come
+            to life!
           </p>
 
           <!-- Step 1: Choose Box Size -->
@@ -642,21 +739,31 @@
                 <span class="box_size-badge">Snack Box</span>
                 <h4 class="box_size-count">4 Cookies</h4>
                 <span class="box_size-price">4 Slots</span>
-                <p class="box_size-info">Perfect solo delight or sweet gesture</p>
+                <p class="box_size-info">
+                  Perfect solo delight or sweet gesture
+                </p>
               </button>
 
-              <button type="button" class="box_size-card active" data-box-size="6">
+              <button
+                type="button"
+                class="box_size-card active"
+                data-box-size="6"
+              >
                 <span class="box_size-badge">Most Popular</span>
                 <h4 class="box_size-count">6 Cookies</h4>
                 <span class="box_size-price">6 Slots</span>
-                <p class="box_size-info">Ideal to share with family & friends</p>
+                <p class="box_size-info">
+                  Ideal to share with family & friends
+                </p>
               </button>
 
               <button type="button" class="box_size-card" data-box-size="12">
                 <span class="box_size-badge">Party Pack</span>
                 <h4 class="box_size-count">12 Cookies</h4>
                 <span class="box_size-price">12 Slots</span>
-                <p class="box_size-info">Party & gathering favorite with all flavors</p>
+                <p class="box_size-info">
+                  Party & gathering favorite with all flavors
+                </p>
               </button>
             </div>
           </div>
@@ -668,18 +775,27 @@
                 <i class="ri-gift-line box_visual-icon" aria-hidden="true"></i>
                 <div>
                   <h4 class="box_visual-heading">Your Custom Box</h4>
-                  <span class="box_visual-sub" id="box-capacity-label">Capacity: 6 Cookies</span>
+                  <span class="box_visual-sub" id="box-capacity-label"
+                    >Capacity: 6 Cookies</span
+                  >
                 </div>
               </div>
 
               <div class="box_counter-pill">
-                <span id="box-selected-count">0</span> / <span id="box-max-count">6</span> cookies selected
-                <span class="box_remaining-badge" id="box-remaining-badge">6 slots left</span>
+                <span id="box-selected-count">0</span> /
+                <span id="box-max-count">6</span> cookies selected
+                <span class="box_remaining-badge" id="box-remaining-badge"
+                  >6 slots left</span
+                >
               </div>
             </div>
 
             <div class="box_meter">
-              <div class="box_meter-fill" id="box-meter-fill" style="width: 0%;"></div>
+              <div
+                class="box_meter-fill"
+                id="box-meter-fill"
+                style="width: 0%"
+              ></div>
             </div>
 
             <!-- Dynamic cookie slots -->
@@ -704,12 +820,22 @@
           <div class="box_summary-bar">
             <div class="box_summary-info">
               <span class="box_summary-label">Total Box Price:</span>
-              <span class="box_summary-total" id="box-summary-price">$ 0.00</span>
-              <span class="box_summary-hint" id="box-summary-hint">Please select 6 cookies to add to cart</span>
+              <span class="box_summary-total" id="box-summary-price"
+                >$ 0.00</span
+              >
+              <span class="box_summary-hint" id="box-summary-hint"
+                >Please select 6 cookies to add to cart</span
+              >
             </div>
 
-            <button type="button" class="button box_add-btn" id="box-add-cart-btn" disabled>
-              Add Custom Box to Cart <i class="ri-shopping-bag-3-line" aria-hidden="true"></i>
+            <button
+              type="button"
+              class="button box_add-btn"
+              id="box-add-cart-btn"
+              disabled
+            >
+              Add Custom Box to Cart
+              <i class="ri-shopping-bag-3-line" aria-hidden="true"></i>
             </button>
           </div>
         </div>
@@ -786,7 +912,8 @@
               rel="noopener noreferrer"
               class="button contact_button"
             >
-              Message us on WhatsApp <i class="ri-whatsapp-line" aria-hidden="true"></i>
+              Message us on WhatsApp
+              <i class="ri-whatsapp-line" aria-hidden="true"></i>
             </a>
           </div>
 
@@ -884,17 +1011,32 @@
     </footer>
 
     <!--==================== QUICK VIEW MODAL ====================-->
-    <div class="modal" id="quickview-modal" aria-hidden="true" role="dialog" aria-labelledby="quickview-title">
+    <div
+      class="modal"
+      id="quickview-modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="quickview-title"
+    >
       <div class="modal_overlay" id="quickview-overlay"></div>
       <div class="modal_container">
-        <button class="modal_close" id="quickview-close" aria-label="Close modal">
+        <button
+          class="modal_close"
+          id="quickview-close"
+          aria-label="Close modal"
+        >
           <i class="ri-close-line" aria-hidden="true"></i>
         </button>
 
         <div class="modal_body">
           <div class="modal_image-box">
             <span class="modal_badge" id="quickview-badge">Fresh</span>
-            <img src="./assets/img/cookie-1.png" alt="Cookie" class="modal_img" id="quickview-img" />
+            <img
+              src="./assets/img/cookie-1.png"
+              alt="Cookie"
+              class="modal_img"
+              id="quickview-img"
+            />
           </div>
 
           <div class="modal_details">
@@ -902,7 +1044,8 @@
             <div class="modal_meta">
               <span class="modal_price" id="quickview-price">$ 0.00</span>
               <span class="modal_calories" id="quickview-calories">
-                <i class="ri-fire-line" aria-hidden="true"></i> <span>350 kcal</span>
+                <i class="ri-fire-line" aria-hidden="true"></i>
+                <span>350 kcal</span>
               </span>
             </div>
 
@@ -917,11 +1060,19 @@
             <div class="modal_quantity-wrapper">
               <span class="modal_label">Quantity:</span>
               <div class="quantity_selector">
-                <button class="quantity_btn" id="quickview-qty-minus" aria-label="Decrease quantity">
+                <button
+                  class="quantity_btn"
+                  id="quickview-qty-minus"
+                  aria-label="Decrease quantity"
+                >
                   <i class="ri-subtract-line" aria-hidden="true"></i>
                 </button>
                 <span class="quantity_value" id="quickview-qty">1</span>
-                <button class="quantity_btn" id="quickview-qty-plus" aria-label="Increase quantity">
+                <button
+                  class="quantity_btn"
+                  id="quickview-qty-plus"
+                  aria-label="Increase quantity"
+                >
                   <i class="ri-add-line" aria-hidden="true"></i>
                 </button>
               </div>
@@ -930,9 +1081,15 @@
 
             <div class="modal_actions">
               <button class="button modal_add-cart" id="quickview-add-cart">
-                Add to Cart <i class="ri-shopping-bag-3-line" aria-hidden="true"></i>
+                Add to Cart
+                <i class="ri-shopping-bag-3-line" aria-hidden="true"></i>
               </button>
-              <button class="modal_wishlist-btn" id="quickview-wishlist-btn" aria-label="Add to wishlist" title="Add to Wishlist">
+              <button
+                class="modal_wishlist-btn"
+                id="quickview-wishlist-btn"
+                aria-label="Add to wishlist"
+                title="Add to Wishlist"
+              >
                 <i class="ri-heart-line" aria-hidden="true"></i>
               </button>
             </div>
@@ -942,15 +1099,24 @@
     </div>
 
     <!--==================== SHOPPING CART DRAWER ====================-->
-    <div class="drawer" id="cart-drawer" aria-hidden="true" role="dialog" aria-labelledby="cart-drawer-title">
+    <div
+      class="drawer"
+      id="cart-drawer"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="cart-drawer-title"
+    >
       <div class="drawer_overlay" id="cart-overlay"></div>
       <div class="drawer_panel">
         <div class="drawer_header">
           <div class="drawer_title-group">
             <h3 class="drawer_title" id="cart-drawer-title">
-              <i class="ri-shopping-bag-3-line" aria-hidden="true"></i> Your Cart
+              <i class="ri-shopping-bag-3-line" aria-hidden="true"></i> Your
+              Cart
             </h3>
-            <span class="drawer_count-pill" id="cart-drawer-count">0 items</span>
+            <span class="drawer_count-pill" id="cart-drawer-count"
+              >0 items</span
+            >
           </div>
           <button class="drawer_close" id="cart-close" aria-label="Close cart">
             <i class="ri-close-line" aria-hidden="true"></i>
@@ -966,8 +1132,13 @@
           <p class="drawer_empty-desc">
             Looks like you haven’t added any delicious cookies yet.
           </p>
-          <a href="#products" class="button drawer_empty-btn" id="cart-browse-btn">
-            Explore Cookies <i class="ri-arrow-right-line" aria-hidden="true"></i>
+          <a
+            href="#products"
+            class="button drawer_empty-btn"
+            id="cart-browse-btn"
+          >
+            Explore Cookies
+            <i class="ri-arrow-right-line" aria-hidden="true"></i>
           </a>
         </div>
 
@@ -990,14 +1161,21 @@
           </div>
 
           <button class="button drawer_checkout-btn" id="cart-checkout-btn">
-            Proceed to Checkout <i class="ri-arrow-right-line" aria-hidden="true"></i>
+            Proceed to Checkout
+            <i class="ri-arrow-right-line" aria-hidden="true"></i>
           </button>
         </div>
       </div>
     </div>
 
     <!--==================== WISHLIST DRAWER ====================-->
-    <div class="drawer" id="wishlist-drawer" aria-hidden="true" role="dialog" aria-labelledby="wishlist-drawer-title">
+    <div
+      class="drawer"
+      id="wishlist-drawer"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="wishlist-drawer-title"
+    >
       <div class="drawer_overlay" id="wishlist-overlay"></div>
       <div class="drawer_panel">
         <div class="drawer_header">
@@ -1005,9 +1183,15 @@
             <h3 class="drawer_title" id="wishlist-drawer-title">
               <i class="ri-heart-line" aria-hidden="true"></i> Wishlist
             </h3>
-            <span class="drawer_count-pill" id="wishlist-drawer-count">0 items</span>
+            <span class="drawer_count-pill" id="wishlist-drawer-count"
+              >0 items</span
+            >
           </div>
-          <button class="drawer_close" id="wishlist-close" aria-label="Close wishlist">
+          <button
+            class="drawer_close"
+            id="wishlist-close"
+            aria-label="Close wishlist"
+          >
             <i class="ri-close-line" aria-hidden="true"></i>
           </button>
         </div>
@@ -1019,9 +1203,14 @@
           </div>
           <h4 class="drawer_empty-title">Your wishlist is empty</h4>
           <p class="drawer_empty-desc">
-            Save your favorite freshly baked flavors to view or buy them anytime!
+            Save your favorite freshly baked flavors to view or buy them
+            anytime!
           </p>
-          <a href="#products" class="button drawer_empty-btn" id="wishlist-browse-btn">
+          <a
+            href="#products"
+            class="button drawer_empty-btn"
+            id="wishlist-browse-btn"
+          >
             Browse Menu <i class="ri-arrow-right-line" aria-hidden="true"></i>
           </a>
         </div>
@@ -1032,70 +1221,155 @@
     </div>
 
     <!--==================== CHECKOUT MODAL ====================-->
-    <div class="modal" id="checkout-modal" aria-hidden="true" role="dialog" aria-labelledby="checkout-modal-title">
+    <div
+      class="modal"
+      id="checkout-modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="checkout-modal-title"
+    >
       <div class="modal_overlay" id="checkout-overlay"></div>
       <div class="modal_container modal_container--checkout">
-        <button class="modal_close" id="checkout-close" aria-label="Close checkout">
+        <button
+          class="modal_close"
+          id="checkout-close"
+          aria-label="Close checkout"
+        >
           <i class="ri-close-line" aria-hidden="true"></i>
         </button>
 
         <div class="checkout_wrapper">
           <div class="checkout_form-col">
             <h2 class="modal_title" id="checkout-modal-title">Checkout</h2>
-            <p class="checkout_subtitle">Enter your delivery details to place your artisan cookie order.</p>
+            <p class="checkout_subtitle">
+              Enter your delivery details to place your artisan cookie order.
+            </p>
 
             <form class="checkout_form" id="checkout-form" novalidate>
               <div class="form_group">
-                <label for="checkout-name" class="form_label">Full Name *</label>
-                <input type="text" id="checkout-name" name="name" class="form_input" placeholder="e.g. Sofia Ramirez" required autocomplete="name" />
+                <label for="checkout-name" class="form_label"
+                  >Full Name *</label
+                >
+                <input
+                  type="text"
+                  id="checkout-name"
+                  name="name"
+                  class="form_input"
+                  placeholder="e.g. Sofia Ramirez"
+                  required
+                  autocomplete="name"
+                />
                 <span class="form_error" id="error-name"></span>
               </div>
 
               <div class="form_row">
                 <div class="form_group">
-                  <label for="checkout-email" class="form_label">Email Address *</label>
-                  <input type="email" id="checkout-email" name="email" class="form_input" placeholder="sofia@example.com" required autocomplete="email" />
+                  <label for="checkout-email" class="form_label"
+                    >Email Address *</label
+                  >
+                  <input
+                    type="email"
+                    id="checkout-email"
+                    name="email"
+                    class="form_input"
+                    placeholder="sofia@example.com"
+                    required
+                    autocomplete="email"
+                  />
                   <span class="form_error" id="error-email"></span>
                 </div>
 
                 <div class="form_group">
-                  <label for="checkout-phone" class="form_label">Phone Number *</label>
-                  <input type="tel" id="checkout-phone" name="phone" class="form_input" placeholder="+51 987 654 321" required autocomplete="tel" />
+                  <label for="checkout-phone" class="form_label"
+                    >Phone Number *</label
+                  >
+                  <input
+                    type="tel"
+                    id="checkout-phone"
+                    name="phone"
+                    class="form_input"
+                    placeholder="+51 987 654 321"
+                    required
+                    autocomplete="tel"
+                  />
                   <span class="form_error" id="error-phone"></span>
                 </div>
               </div>
 
               <div class="form_group">
-                <label for="checkout-address" class="form_label">Delivery Address *</label>
-                <input type="text" id="checkout-address" name="address" class="form_input" placeholder="Av. Larco 456, Apt 3B" required autocomplete="street-address" />
+                <label for="checkout-address" class="form_label"
+                  >Delivery Address *</label
+                >
+                <input
+                  type="text"
+                  id="checkout-address"
+                  name="address"
+                  class="form_input"
+                  placeholder="Av. Larco 456, Apt 3B"
+                  required
+                  autocomplete="street-address"
+                />
                 <span class="form_error" id="error-address"></span>
               </div>
 
               <div class="form_row">
                 <div class="form_group">
                   <label for="checkout-city" class="form_label">City *</label>
-                  <input type="text" id="checkout-city" name="city" class="form_input" placeholder="Lima" required autocomplete="address-level2" value="Lima" />
+                  <input
+                    type="text"
+                    id="checkout-city"
+                    name="city"
+                    class="form_input"
+                    placeholder="Lima"
+                    required
+                    autocomplete="address-level2"
+                    value="Lima"
+                  />
                   <span class="form_error" id="error-city"></span>
                 </div>
 
                 <div class="form_group">
-                  <label for="checkout-postal" class="form_label">Postal Code *</label>
-                  <input type="text" id="checkout-postal" name="postal" class="form_input" placeholder="15074" required autocomplete="postal-code" />
+                  <label for="checkout-postal" class="form_label"
+                    >Postal Code *</label
+                  >
+                  <input
+                    type="text"
+                    id="checkout-postal"
+                    name="postal"
+                    class="form_input"
+                    placeholder="15074"
+                    required
+                    autocomplete="postal-code"
+                  />
                   <span class="form_error" id="error-postal"></span>
                 </div>
               </div>
 
               <div class="form_group">
-                <label for="checkout-notes" class="form_label">Order Notes (Optional)</label>
-                <textarea id="checkout-notes" name="notes" class="form_textarea" placeholder="Special delivery instructions, gate code, or gift note..."></textarea>
+                <label for="checkout-notes" class="form_label"
+                  >Order Notes (Optional)</label
+                >
+                <textarea
+                  id="checkout-notes"
+                  name="notes"
+                  class="form_textarea"
+                  placeholder="Special delivery instructions, gate code, or gift note..."
+                ></textarea>
               </div>
 
               <div class="checkout_notice">
                 <i class="ri-information-line" aria-hidden="true"></i>
-                <span>This is a frontend demonstration order. No actual payment card is needed.</span>
+                <span
+                  >This is a frontend demonstration order. No actual payment
+                  card is needed.</span
+                >
               </div>
 
-              <button type="submit" class="button checkout_submit-btn" id="place-order-btn">
+              <button
+                type="submit"
+                class="button checkout_submit-btn"
+                id="place-order-btn"
+              >
                 Place Order <i class="ri-check-line" aria-hidden="true"></i>
               </button>
             </form>
@@ -1103,7 +1377,10 @@
 
           <div class="checkout_summary-col">
             <h3 class="checkout_summary-title">Order Summary</h3>
-            <div class="checkout_summary-items" id="checkout-summary-items"></div>
+            <div
+              class="checkout_summary-items"
+              id="checkout-summary-items"
+            ></div>
 
             <div class="checkout_summary-totals">
               <div class="summary_row">
@@ -1125,10 +1402,20 @@
     </div>
 
     <!--==================== ORDER CONFIRMATION MODAL ====================-->
-    <div class="modal" id="order-confirm-modal" aria-hidden="true" role="dialog" aria-labelledby="order-confirm-title">
+    <div
+      class="modal"
+      id="order-confirm-modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="order-confirm-title"
+    >
       <div class="modal_overlay" id="order-confirm-overlay"></div>
       <div class="modal_container modal_container--confirm">
-        <button class="modal_close" id="order-confirm-close" aria-label="Close modal">
+        <button
+          class="modal_close"
+          id="order-confirm-close"
+          aria-label="Close modal"
+        >
           <i class="ri-close-line" aria-hidden="true"></i>
         </button>
 
@@ -1137,7 +1424,9 @@
             <i class="ri-check-double-line" aria-hidden="true"></i>
           </div>
           <span class="section_subtitle">Order Confirmed!</span>
-          <h2 class="modal_title" id="order-confirm-title">Thank You For Your Order!</h2>
+          <h2 class="modal_title" id="order-confirm-title">
+            Thank You For Your Order!
+          </h2>
           <p class="order_confirm-lead">
             We've received your request and our bakers are warming up the ovens!
           </p>
@@ -1146,19 +1435,27 @@
             <div class="order_meta-grid">
               <div>
                 <span class="order_label">Order ID:</span>
-                <strong class="order_value" id="confirm-order-id">#CK-00000</strong>
+                <strong class="order_value" id="confirm-order-id"
+                  >#CK-00000</strong
+                >
               </div>
               <div>
                 <span class="order_label">Date & Time:</span>
-                <span class="order_value" id="confirm-order-date">Nov 9, 2026</span>
+                <span class="order_value" id="confirm-order-date"
+                  >Nov 9, 2026</span
+                >
               </div>
               <div>
                 <span class="order_label">Recipient:</span>
-                <span class="order_value" id="confirm-customer-name">Sofia Ramirez</span>
+                <span class="order_value" id="confirm-customer-name"
+                  >Sofia Ramirez</span
+                >
               </div>
               <div>
                 <span class="order_label">Delivery To:</span>
-                <span class="order_value" id="confirm-customer-address">Av. Larco 456, Lima</span>
+                <span class="order_value" id="confirm-customer-address"
+                  >Av. Larco 456, Lima</span
+                >
               </div>
             </div>
 
@@ -1172,21 +1469,34 @@
           </div>
 
           <p class="order_simulation-note">
-            <i class="ri-information-line" aria-hidden="true"></i> Frontend portfolio demonstration only. No real payment or delivery request was transmitted.
+            <i class="ri-information-line" aria-hidden="true"></i> Frontend
+            portfolio demonstration only. No real payment or delivery request
+            was transmitted.
           </p>
 
           <button class="button order_continue-btn" id="confirm-continue-btn">
-            Continue Shopping <i class="ri-arrow-right-line" aria-hidden="true"></i>
+            Continue Shopping
+            <i class="ri-arrow-right-line" aria-hidden="true"></i>
           </button>
         </div>
       </div>
     </div>
 
     <!--==================== TOAST CONTAINER ====================-->
-    <div class="toast_container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+    <div
+      class="toast_container"
+      id="toast-container"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
 
     <!--========== SCROLL UP ==========-->
-    <a href="#" class="scrollup" id="scroll-up" aria-label="Scroll to top of page">
+    <a
+      href="#"
+      class="scrollup"
+      id="scroll-up"
+      aria-label="Scroll to top of page"
+    >
       <i class="ri-arrow-up-line" aria-hidden="true"></i>
     </a>
 
