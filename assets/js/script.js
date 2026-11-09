@@ -544,6 +544,17 @@ if (!reduceMotion) {
   revealCards(".products_card", ".products_img");
   reveal(".products_more");
 
+  /* Box Builder */
+  reveal(".box-builder :is(.section_subtitle, .section_title)", {
+    stagger: 0.2,
+  });
+
+  /* Reviews */
+  reveal(".reviews :is(.section_subtitle, .section_title)", {
+    stagger: 0.2,
+  });
+  revealCards(".reviews_card");
+
   /* Contact */
   revealCards(".contact_card");
   reveal(".contact_button");
@@ -678,6 +689,7 @@ const STORAGE_KEYS = {
   CART: "cookie_cart_v1",
   WISHLIST: "cookie_wishlist_v1",
   ORDER: "cookie_last_order_v1",
+  THEME: "cookie_theme_v1",
 };
 
 const safeJSONParse = (str, fallback) => {
@@ -1801,7 +1813,59 @@ document.addEventListener("click", (e) => {
   }
 });
 
+/*=============== 11. DARK / LIGHT THEME TOGGLE ===============*/
+const getInitialTheme = () => {
+  const saved = localStorage.getItem(STORAGE_KEYS.THEME);
+  if (saved === "dark" || saved === "light") return saved;
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
+const applyTheme = (theme) => {
+  const themeIcon = document.getElementById("theme-icon");
+  if (theme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    if (themeIcon) {
+      themeIcon.className = "ri-sun-line";
+    }
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+    if (themeIcon) {
+      themeIcon.className = "ri-moon-line";
+    }
+  }
+  try {
+    localStorage.setItem(STORAGE_KEYS.THEME, theme);
+  } catch (err) {
+    console.error("Theme save error:", err);
+  }
+};
+
+const initTheme = () => {
+  const currentTheme = getInitialTheme();
+  applyTheme(currentTheme);
+
+  const themeToggleBtn = document.getElementById("theme-toggle");
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      const newTheme = isDark ? "light" : "dark";
+      applyTheme(newTheme);
+      showToast({
+        title: newTheme === "dark" ? "Dark Mode" : "Light Mode",
+        message: `${newTheme === "dark" ? "Dark" : "Light"} theme activated`,
+        icon: newTheme === "dark" ? "ri-sun-line" : "ri-moon-line",
+      });
+    });
+  }
+};
+
+// Apply initial theme early
+applyTheme(getInitialTheme());
+
 document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
   updateCartBadge();
   updateWishlistBadge();
   renderBoxBuilder();
