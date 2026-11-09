@@ -542,18 +542,11 @@ if (!reduceMotion) {
 
   /* Products */
   revealCards(".products_card", ".products_img");
-  reveal(".products_more");
 
   /* Box Builder */
   reveal(".box-builder :is(.section_subtitle, .section_title)", {
     stagger: 0.2,
   });
-
-  /* Reviews */
-  reveal(".reviews :is(.section_subtitle, .section_title)", {
-    stagger: 0.2,
-  });
-  revealCards(".reviews_card");
 
   /* Contact */
   revealCards(".contact_card");
@@ -643,43 +636,6 @@ const PRODUCTS_DATA = [
     calories: "300 kcal",
     allergens: "Gluten, Dairy",
   },
-  /* 3 Additional Flavours for 'View Full Menu' */
-  {
-    id: "cookie-salted-caramel",
-    name: "Salted Caramel Pecan",
-    shortName: "Salted caramel",
-    price: 8.99,
-    image: "./assets/img/cookie-1.png",
-    alt: "Salted caramel pecan artisan cookie",
-    badge: "New Flavor",
-    description: "Gooey artisan caramel pockets, toasted Georgia pecans, and a delicate pinch of flaky Maldon sea salt.",
-    calories: "330 kcal",
-    allergens: "Tree Nuts, Dairy, Gluten",
-  },
-  {
-    id: "cookie-hazelnut-praline",
-    name: "Hazelnut Praline",
-    shortName: "Hazelnut praline",
-    price: 10.99,
-    image: "./assets/img/cookie-5.png",
-    alt: "Hazelnut praline gourmet cookie",
-    badge: "Gourmet",
-    description: "Roasted crushed Piedmont hazelnuts and sweet praline cream swirled through a golden buttery dough.",
-    calories: "340 kcal",
-    allergens: "Tree Nuts, Dairy, Gluten",
-  },
-  {
-    id: "cookie-espresso-dark",
-    name: "Espresso Dark Choco",
-    shortName: "Espresso choco",
-    price: 11.99,
-    image: "./assets/img/cookie-2.png",
-    alt: "Espresso dark chocolate cookie",
-    badge: "Chef's Special",
-    description: "Freshly ground Arabica espresso beans infused into a 70% Valrhona dark chocolate dough with bittersweet chunks.",
-    calories: "305 kcal",
-    allergens: "Gluten, Dairy, Soy",
-  },
 ];
 
 const getProductById = (id) => PRODUCTS_DATA.find((item) => item.id === id);
@@ -689,7 +645,6 @@ const STORAGE_KEYS = {
   CART: "cookie_cart_v1",
   WISHLIST: "cookie_wishlist_v1",
   ORDER: "cookie_last_order_v1",
-  THEME: "cookie_theme_v1",
 };
 
 const safeJSONParse = (str, fallback) => {
@@ -1251,76 +1206,7 @@ if (wishlistEmptyShopBtn) {
   });
 }
 
-/*=============== 8. LOAD MORE PRODUCTS ("VIEW FULL MENU") ===============*/
-const productsMoreBtn = document.getElementById("products-more");
-const productsContent = document.getElementById("products-content");
-let fullMenuLoaded = false;
-
-if (productsMoreBtn && productsContent) {
-  productsMoreBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (fullMenuLoaded) return;
-
-    // Load the 3 additional products (index 6, 7, 8)
-    const extraProducts = PRODUCTS_DATA.slice(6, 9);
-    const newCards = [];
-
-    extraProducts.forEach((product) => {
-      const card = document.createElement("article");
-      card.className = "products_card";
-      card.setAttribute("data-product-id", product.id);
-      card.innerHTML = `
-        <div class="products_card-top">
-          <button class="products_quick-btn" data-product-id="${product.id}" title="Quick View" aria-label="Quick View for ${product.shortName}">
-            <i class="ri-eye-line"></i>
-          </button>
-        </div>
-
-        <img
-          src="${product.image}"
-          alt="${product.alt}"
-          class="products_img"
-          data-product-id="${product.id}"
-        />
-
-        <h3 class="products_name" data-product-id="${product.id}">${product.shortName}</h3>
-
-        <div class="products_data">
-          <span class="products_price">$ ${product.price.toFixed(2)}</span>
-
-          <button class="products_add" data-product-id="${product.id}" aria-label="Add to cart">
-            <i class="ri-add-line"></i>
-          </button>
-        </div>
-      `;
-      productsContent.appendChild(card);
-      newCards.push(card);
-    });
-
-    fullMenuLoaded = true;
-    productsMoreBtn.setAttribute("disabled", "true");
-    productsMoreBtn.innerHTML = `All products displayed <i class="ri-check-line"></i>`;
-
-    if (window.gsap) {
-      gsap.from(newCards, {
-        y: 45,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-        clearProps: "all",
-      });
-    }
-
-    showToast({
-      title: "Menu Expanded",
-      message: "3 new artisanal flavours added to menu!",
-      image: extraProducts[0].image,
-    });
-  });
-}
-
-/*=============== 9. CUSTOM COOKIE BOX BUILDER ===============*/
+/*=============== 8. CUSTOM COOKIE BOX BUILDER ===============*/
 const boxBuilderState = {
   size: 6,
   price: 32.99,
@@ -1813,59 +1699,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
-/*=============== 11. DARK / LIGHT THEME TOGGLE ===============*/
-const getInitialTheme = () => {
-  const saved = localStorage.getItem(STORAGE_KEYS.THEME);
-  if (saved === "dark" || saved === "light") return saved;
-  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-};
-
-const applyTheme = (theme) => {
-  const themeIcon = document.getElementById("theme-icon");
-  if (theme === "dark") {
-    document.documentElement.setAttribute("data-theme", "dark");
-    if (themeIcon) {
-      themeIcon.className = "ri-sun-line";
-    }
-  } else {
-    document.documentElement.removeAttribute("data-theme");
-    if (themeIcon) {
-      themeIcon.className = "ri-moon-line";
-    }
-  }
-  try {
-    localStorage.setItem(STORAGE_KEYS.THEME, theme);
-  } catch (err) {
-    console.error("Theme save error:", err);
-  }
-};
-
-const initTheme = () => {
-  const currentTheme = getInitialTheme();
-  applyTheme(currentTheme);
-
-  const themeToggleBtn = document.getElementById("theme-toggle");
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener("click", () => {
-      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-      const newTheme = isDark ? "light" : "dark";
-      applyTheme(newTheme);
-      showToast({
-        title: newTheme === "dark" ? "Dark Mode" : "Light Mode",
-        message: `${newTheme === "dark" ? "Dark" : "Light"} theme activated`,
-        icon: newTheme === "dark" ? "ri-sun-line" : "ri-moon-line",
-      });
-    });
-  }
-};
-
-// Apply initial theme early
-applyTheme(getInitialTheme());
-
 document.addEventListener("DOMContentLoaded", () => {
-  initTheme();
   updateCartBadge();
   updateWishlistBadge();
   renderBoxBuilder();
