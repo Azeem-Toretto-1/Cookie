@@ -553,3 +553,186 @@ if (!reduceMotion) {
   reveal(".footer_group > *", { stagger: 0.2 }, ".footer");
   reveal(".footer_data", { stagger: 0.2 }, ".footer_content");
 }
+
+/*====================================================================
+  ==================== COOKIE SHOP E-COMMERCE CORE ===================
+  ====================================================================*/
+
+/*=============== 1. PRODUCT CATALOG DATA ===============*/
+const PRODUCTS_DATA = [
+  {
+    id: "cookie-classic",
+    name: "Classic Chocolate",
+    shortName: "Classic",
+    price: 5.99,
+    image: "./assets/img/cookie-1.png",
+    alt: "Classic chocolate chip cookie",
+    badge: "Best sellers",
+    description: "Golden and crispy on the outside, soft on the inside, with generous pieces of melted semi-sweet chocolate.",
+    calories: "280 kcal",
+    allergens: "Gluten, Dairy, Soy",
+  },
+  {
+    id: "cookie-double-choco",
+    name: "Double Chocolate",
+    shortName: "Double choco",
+    price: 9.99,
+    image: "./assets/img/cookie-2.png",
+    alt: "Double chocolate cookie with white chocolate chips",
+    badge: "Popular",
+    description: "A rich, intense cocoa dough with chunks of premium white chocolate that melt on the palate with every bite.",
+    calories: "320 kcal",
+    allergens: "Gluten, Dairy, Soy",
+  },
+  {
+    id: "cookie-red-velvet",
+    name: "Red Velvet",
+    shortName: "Red velvet",
+    price: 12.99,
+    image: "./assets/img/cookie-3.png",
+    alt: "Red velvet cookie with white chocolate chips",
+    badge: "Favorite",
+    description: "Smooth and velvety cocoa dough infused with vanilla, loaded with creamy white chocolate chips for your enjoyment.",
+    calories: "310 kcal",
+    allergens: "Gluten, Dairy",
+  },
+  {
+    id: "cookie-oats-raisins",
+    name: "Oats & Raisins",
+    shortName: "Oats and raisins",
+    price: 6.99,
+    image: "./assets/img/cookie-4.png",
+    alt: "Oatmeal raisin cookie",
+    badge: "Wholesome",
+    description: "Toasted rolled oats combined with plump, juicy raisins and warm cinnamon spice for a comforting homestyle treat.",
+    calories: "250 kcal",
+    allergens: "Gluten",
+  },
+  {
+    id: "cookie-peanuts",
+    name: "Peanut Butter Crunch",
+    shortName: "Peanuts",
+    price: 4.99,
+    image: "./assets/img/cookie-5.png",
+    alt: "Peanut butter cookie",
+    badge: "Classic",
+    description: "Creamy roasted peanut butter folded into tender dough with crispy edges and a melt-in-your-mouth center.",
+    calories: "290 kcal",
+    allergens: "Peanuts, Dairy, Gluten",
+  },
+  {
+    id: "cookie-white-matcha",
+    name: "White Matcha",
+    shortName: "White matcha",
+    price: 13.99,
+    image: "./assets/img/cookie-6.png",
+    alt: "White chocolate matcha cookie",
+    badge: "Artisan",
+    description: "Authentic ceremonial-grade Japanese green matcha dough balanced with sweet, silky Belgian white chocolate chips.",
+    calories: "300 kcal",
+    allergens: "Gluten, Dairy",
+  },
+];
+
+const getProductById = (id) => PRODUCTS_DATA.find((item) => item.id === id);
+
+/* State Variables */
+let currentQuickViewProduct = null;
+let quickViewQuantity = 1;
+
+/*=============== 2. QUICK VIEW MODAL ===============*/
+const quickViewModal = document.getElementById("quickview-modal");
+const quickViewClose = document.getElementById("quickview-close");
+const quickViewOverlay = document.getElementById("quickview-overlay");
+const quickViewQty = document.getElementById("quickview-qty");
+const quickViewQtyMinus = document.getElementById("quickview-qty-minus");
+const quickViewQtyPlus = document.getElementById("quickview-qty-plus");
+const quickViewTotal = document.getElementById("quickview-total");
+const quickViewAddCart = document.getElementById("quickview-add-cart");
+const quickViewWishlist = document.getElementById("quickview-wishlist");
+const quickViewWishlistIcon = document.getElementById("quickview-wishlist-icon");
+
+const openQuickView = (productId) => {
+  const product = getProductById(productId);
+  if (!product) return;
+
+  currentQuickViewProduct = product;
+  quickViewQuantity = 1;
+
+  // Populate data
+  document.getElementById("quickview-img").src = product.image;
+  document.getElementById("quickview-img").alt = product.alt;
+  document.getElementById("quickview-badge").textContent = product.badge;
+  document.getElementById("quickview-title").textContent = product.name;
+  document.getElementById("quickview-price").textContent = `$ ${product.price.toFixed(2)}`;
+  document.getElementById("quickview-calories").innerHTML = `<i class="ri-fire-line"></i> ${product.calories}`;
+  document.getElementById("quickview-description").textContent = product.description;
+  document.getElementById("quickview-allergens").textContent = product.allergens;
+
+  updateQuickViewCalculation();
+
+  // Open modal
+  quickViewModal.classList.add("show");
+  document.body.classList.add("modal-open");
+};
+
+const closeQuickView = () => {
+  if (!quickViewModal) return;
+  quickViewModal.classList.remove("show");
+  document.body.classList.remove("modal-open");
+};
+
+const updateQuickViewCalculation = () => {
+  if (!currentQuickViewProduct) return;
+  if (quickViewQty) quickViewQty.textContent = quickViewQuantity;
+  if (quickViewTotal) {
+    const total = (currentQuickViewProduct.price * quickViewQuantity).toFixed(2);
+    quickViewTotal.textContent = `Total: $${total}`;
+  }
+};
+
+if (quickViewQtyMinus) {
+  quickViewQtyMinus.addEventListener("click", () => {
+    if (quickViewQuantity > 1) {
+      quickViewQuantity--;
+      updateQuickViewCalculation();
+    }
+  });
+}
+
+if (quickViewQtyPlus) {
+  quickViewQtyPlus.addEventListener("click", () => {
+    quickViewQuantity++;
+    updateQuickViewCalculation();
+  });
+}
+
+if (quickViewClose) quickViewClose.addEventListener("click", closeQuickView);
+if (quickViewOverlay) quickViewOverlay.addEventListener("click", closeQuickView);
+
+// Escape key to close modal
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeQuickView();
+  }
+});
+
+// Click delegation to trigger Quick View
+document.addEventListener("click", (e) => {
+  const qvBtn = e.target.closest(".products_quick-btn, .featured_button");
+  if (qvBtn) {
+    e.stopPropagation();
+    const productId = qvBtn.getAttribute("data-product-id");
+    if (productId) openQuickView(productId);
+    return;
+  }
+
+  const targetImgOrName = e.target.closest(".products_img, .products_name");
+  if (targetImgOrName) {
+    const card = targetImgOrName.closest(".products_card, .featured_card");
+    if (card) {
+      const productId = card.getAttribute("data-product-id");
+      if (productId) openQuickView(productId);
+    }
+  }
+});

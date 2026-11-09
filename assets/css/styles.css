@@ -77,6 +77,11 @@ button {
 body {
   background-color: var(--body-color);
   color: var(--text-color);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 input,
@@ -1130,5 +1135,305 @@ img {
 
   .scrollup {
     right: 3rem;
+  }
+}
+
+/*=============== PRODUCTS ADDITIONS ===============*/
+.products_card {
+  position: relative;
+  cursor: pointer;
+}
+
+.products_card-top {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+}
+
+.products_quick-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--first-color-lighten);
+  color: var(--first-color);
+  font-size: 1.15rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    transform 0.2s;
+}
+
+.products_quick-btn:hover {
+  background-color: var(--first-color);
+  color: var(--first-color-lighten);
+  transform: scale(1.1);
+}
+
+/*=============== MODALS BASE & QUICK VIEW ===============*/
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal_overlay {
+  position: absolute;
+  inset: 0;
+  background-color: hsla(17, 43%, 12%, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.modal_container {
+  position: relative;
+  z-index: 2;
+  background-color: var(--container-color);
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 1.75rem;
+  padding: 2rem 1.5rem 1.5rem;
+  box-shadow: 0 16px 40px hsla(0, 0%, 0%, 0.25);
+  transform: scale(0.92);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal.show .modal_container {
+  transform: scale(1);
+}
+
+.modal_close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--first-color-lighten);
+  color: var(--first-color);
+  font-size: 1.25rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 10;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    transform 0.2s;
+}
+
+.modal_close:hover {
+  background-color: var(--first-color);
+  color: var(--first-color-lighten);
+  transform: rotate(90deg);
+}
+
+.modal_body {
+  display: grid;
+  row-gap: 1.5rem;
+}
+
+.modal_image-box {
+  position: relative;
+  background-color: var(--body-color);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  display: grid;
+  place-items: center;
+}
+
+.modal_img {
+  width: 180px;
+  filter: drop-shadow(0 8px 18px hsla(38, 60%, 15%, 0.15));
+}
+
+.modal_badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: var(--first-color);
+  color: var(--first-color-lighten);
+  font-size: var(--smaller-font-size);
+  font-weight: var(--font-medium);
+  padding: 0.25rem 0.85rem;
+  border-radius: 4rem;
+}
+
+.modal_title {
+  font-size: var(--h1-font-size);
+  margin-bottom: 0.5rem;
+}
+
+.modal_meta {
+  display: flex;
+  align-items: center;
+  column-gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.modal_price {
+  font: var(--font-regular) var(--h1-font-size) var(--second-font);
+  color: var(--first-color);
+}
+
+.modal_calories {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.3rem;
+  font-size: var(--small-font-size);
+  color: var(--text-color-light);
+}
+
+.modal_calories i {
+  color: var(--first-color-light);
+}
+
+.modal_description {
+  font-size: var(--normal-font-size);
+  line-height: 150%;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.modal_allergens {
+  font-size: var(--small-font-size);
+  color: var(--text-color-light);
+  margin-bottom: 1.5rem;
+  padding-block: 0.5rem;
+  border-block: 1px dashed var(--first-color-lighten);
+}
+
+.modal_allergens strong {
+  color: var(--title-color);
+}
+
+.modal_quantity-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal_label {
+  font-size: var(--small-font-size);
+  font-weight: var(--font-medium);
+  color: var(--title-color);
+}
+
+.quantity_selector {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  background-color: var(--body-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4rem;
+}
+
+.quantity_btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--first-color-lighten);
+  color: var(--first-color);
+  display: grid;
+  place-items: center;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.quantity_btn:hover {
+  background-color: var(--first-color);
+  color: var(--first-color-lighten);
+}
+
+.quantity_value {
+  min-width: 24px;
+  text-align: center;
+  font-weight: var(--font-semi-bold);
+  font-size: var(--normal-font-size);
+  color: var(--title-color);
+}
+
+.modal_subtotal {
+  font: var(--font-regular) var(--h3-font-size) var(--second-font);
+  color: var(--first-color);
+}
+
+.modal_actions {
+  display: flex;
+  align-items: center;
+  column-gap: 0.75rem;
+}
+
+.modal_add-cart {
+  flex: 1;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.modal_wishlist-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--first-color);
+  background-color: transparent;
+  color: var(--first-color);
+  font-size: 1.4rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    transform 0.2s;
+}
+
+.modal_wishlist-btn:hover {
+  background-color: var(--first-color);
+  color: var(--first-color-lighten);
+  transform: scale(1.05);
+}
+
+.modal_wishlist-btn.active {
+  background-color: var(--first-color);
+  color: var(--first-color-lighten);
+}
+
+@media (width <= 340px) {
+  .modal_container {
+    padding: 1.5rem 1rem 1rem;
+  }
+}
+
+@media (width >= 768px) {
+  .modal_body {
+    grid-template-columns: 240px 1fr;
+    column-gap: 2rem;
+    align-items: center;
   }
 }

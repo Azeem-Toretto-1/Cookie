@@ -183,11 +183,12 @@
         <h2 class="section_title">Featured</h2>
 
         <div class="featured_container container grid">
-          <article class="featured_card">
+          <article class="featured_card" data-product-id="cookie-classic">
             <img
               src="./assets/img/cookie-1.png"
               alt="Classic chocolate chip cookie"
               class="featured_img"
+              data-product-id="cookie-classic"
             />
 
             <span class="featured_badge">Best sellers</span>
@@ -200,17 +201,18 @@
             <div class="featured_data">
               <span class="featured_price">$ 5.99</span>
 
-              <button class="button featured_button">
+              <button class="button featured_button" data-product-id="cookie-classic" aria-label="Quick View for Classic chocolate">
                 Quick View <i class="ri-arrow-right-up-line"></i>
               </button>
             </div>
           </article>
 
-          <article class="featured_card">
+          <article class="featured_card" data-product-id="cookie-double-choco">
             <img
               src="./assets/img/cookie-2.png"
               alt="Double chocolate cookie with white chocolate chips"
               class="featured_img"
+              data-product-id="cookie-double-choco"
             />
 
             <span class="featured_badge">Popular</span>
@@ -223,17 +225,18 @@
             <div class="featured_data">
               <span class="featured_price">$ 9.99</span>
 
-              <button class="button featured_button">
+              <button class="button featured_button" data-product-id="cookie-double-choco" aria-label="Quick View for Double chocolate">
                 Quick View <i class="ri-arrow-right-up-line"></i>
               </button>
             </div>
           </article>
 
-          <article class="featured_card">
+          <article class="featured_card" data-product-id="cookie-red-velvet">
             <img
               src="./assets/img/cookie-3.png"
               alt="Red velvet cookie with white chocolate chips"
               class="featured_img"
+              data-product-id="cookie-red-velvet"
             />
 
             <span class="featured_badge">Favorite</span>
@@ -246,7 +249,7 @@
             <div class="featured_data">
               <span class="featured_price">$ 12.99</span>
 
-              <button class="button featured_button">
+              <button class="button featured_button" data-product-id="cookie-red-velvet" aria-label="Quick View for Red velvet">
                 Quick View <i class="ri-arrow-right-up-line"></i>
               </button>
             </div>
@@ -318,110 +321,152 @@
         <h2 class="section_title">Products</h2>
 
         <div class="products_container container">
-          <div class="products_content grid">
-            <article class="products_card">
+          <div class="products_content grid" id="products-content">
+            <article class="products_card" data-product-id="cookie-classic">
+              <div class="products_card-top">
+                <button class="products_quick-btn" data-product-id="cookie-classic" title="Quick View" aria-label="Quick View for Classic">
+                  <i class="ri-eye-line"></i>
+                </button>
+              </div>
+
               <img
                 src="./assets/img/cookie-1.png"
                 alt="Classic chocolate chip cookie"
                 class="products_img"
+                data-product-id="cookie-classic"
               />
 
-              <h3 class="products_name">Classic</h3>
+              <h3 class="products_name" data-product-id="cookie-classic">Classic</h3>
 
               <div class="products_data">
                 <span class="products_price">$ 5.99</span>
 
-                <button class="products_add" aria-label="Add to cart">
+                <button class="products_add" data-product-id="cookie-classic" aria-label="Add to cart">
                   <i class="ri-add-line"></i>
                 </button>
               </div>
             </article>
 
-            <article class="products_card">
+            <article class="products_card" data-product-id="cookie-double-choco">
+              <div class="products_card-top">
+                <button class="products_quick-btn" data-product-id="cookie-double-choco" title="Quick View" aria-label="Quick View for Double choco">
+                  <i class="ri-eye-line"></i>
+                </button>
+              </div>
+
               <img
                 src="./assets/img/cookie-2.png"
                 alt="Double chocolate cookie with white chocolate chips"
                 class="products_img"
+                data-product-id="cookie-double-choco"
               />
 
-              <h3 class="products_name">Double choco</h3>
+              <h3 class="products_name" data-product-id="cookie-double-choco">Double choco</h3>
 
               <div class="products_data">
                 <span class="products_price">$ 9.99</span>
 
-                <button class="products_add" aria-label="Add to cart">
+                <button class="products_add" data-product-id="cookie-double-choco" aria-label="Add to cart">
                   <i class="ri-add-line"></i>
                 </button>
               </div>
             </article>
 
-            <article class="products_card">
+            <article class="products_card" data-product-id="cookie-red-velvet">
+              <div class="products_card-top">
+                <button class="products_quick-btn" data-product-id="cookie-red-velvet" title="Quick View" aria-label="Quick View for Red velvet">
+                  <i class="ri-eye-line"></i>
+                </button>
+              </div>
+
               <img
                 src="./assets/img/cookie-3.png"
                 alt="Red velvet cookie with white chocolate chips"
                 class="products_img"
+                data-product-id="cookie-red-velvet"
               />
 
-              <h3 class="products_name">Red velvet</h3>
+              <h3 class="products_name" data-product-id="cookie-red-velvet">Red velvet</h3>
 
               <div class="products_data">
                 <span class="products_price">$ 12.99</span>
 
-                <button class="products_add" aria-label="Add to cart">
+                <button class="products_add" data-product-id="cookie-red-velvet" aria-label="Add to cart">
                   <i class="ri-add-line"></i>
                 </button>
               </div>
             </article>
 
-            <article class="products_card">
+            <article class="products_card" data-product-id="cookie-oats-raisins">
+              <div class="products_card-top">
+                <button class="products_quick-btn" data-product-id="cookie-oats-raisins" title="Quick View" aria-label="Quick View for Oats and raisins">
+                  <i class="ri-eye-line"></i>
+                </button>
+              </div>
+
               <img
                 src="./assets/img/cookie-4.png"
                 alt="Oatmeal raisin cookie"
                 class="products_img"
+                data-product-id="cookie-oats-raisins"
               />
 
-              <h3 class="products_name">Oats and raisins</h3>
+              <h3 class="products_name" data-product-id="cookie-oats-raisins">Oats and raisins</h3>
 
               <div class="products_data">
                 <span class="products_price">$ 6.99</span>
 
-                <button class="products_add" aria-label="Add to cart">
+                <button class="products_add" data-product-id="cookie-oats-raisins" aria-label="Add to cart">
                   <i class="ri-add-line"></i>
                 </button>
               </div>
             </article>
 
-            <article class="products_card">
+            <article class="products_card" data-product-id="cookie-peanuts">
+              <div class="products_card-top">
+                <button class="products_quick-btn" data-product-id="cookie-peanuts" title="Quick View" aria-label="Quick View for Peanuts">
+                  <i class="ri-eye-line"></i>
+                </button>
+              </div>
+
               <img
                 src="./assets/img/cookie-5.png"
                 alt="Peanut butter cookie"
                 class="products_img"
+                data-product-id="cookie-peanuts"
               />
 
-              <h3 class="products_name">Peanuts</h3>
+              <h3 class="products_name" data-product-id="cookie-peanuts">Peanuts</h3>
 
               <div class="products_data">
                 <span class="products_price">$ 4.99</span>
 
-                <button class="products_add" aria-label="Add to cart">
+                <button class="products_add" data-product-id="cookie-peanuts" aria-label="Add to cart">
                   <i class="ri-add-line"></i>
                 </button>
               </div>
             </article>
 
-            <article class="products_card">
+            <article class="products_card" data-product-id="cookie-white-matcha">
+              <div class="products_card-top">
+                <button class="products_quick-btn" data-product-id="cookie-white-matcha" title="Quick View" aria-label="Quick View for White matcha">
+                  <i class="ri-eye-line"></i>
+                </button>
+              </div>
+
               <img
                 src="./assets/img/cookie-6.png"
                 alt="White chocolate matcha cookie"
                 class="products_img"
+                data-product-id="cookie-white-matcha"
               />
 
-              <h3 class="products_name">White matcha</h3>
+              <h3 class="products_name" data-product-id="cookie-white-matcha">White matcha</h3>
 
               <div class="products_data">
                 <span class="products_price">$ 13.99</span>
 
-                <button class="products_add" aria-label="Add to cart">
+                <button class="products_add" data-product-id="cookie-white-matcha" aria-label="Add to cart">
                   <i class="ri-add-line"></i>
                 </button>
               </div>
@@ -597,6 +642,62 @@
         © All Rights Reserved By Azeem Toretto
       </small>
     </footer>
+
+    <!--==================== QUICK VIEW MODAL ====================-->
+    <div class="modal" id="quickview-modal" aria-hidden="true" role="dialog" aria-labelledby="quickview-title">
+      <div class="modal_overlay" id="quickview-overlay"></div>
+      <div class="modal_container">
+        <button class="modal_close" id="quickview-close" aria-label="Close modal">
+          <i class="ri-close-line"></i>
+        </button>
+
+        <div class="modal_body" id="quickview-body">
+          <div class="modal_image-box">
+            <img src="./assets/img/cookie-1.png" alt="" class="modal_img" id="quickview-img" />
+            <span class="modal_badge" id="quickview-badge">Best sellers</span>
+          </div>
+
+          <div class="modal_data">
+            <h2 class="modal_title" id="quickview-title">Classic Chocolate</h2>
+            <div class="modal_meta">
+              <span class="modal_price" id="quickview-price">$ 5.99</span>
+              <span class="modal_calories" id="quickview-calories"><i class="ri-fire-line"></i> 280 kcal</span>
+            </div>
+
+            <p class="modal_description" id="quickview-description">
+              Golden and crispy on the outside, soft on the inside, with pieces of semi-sweet chocolate.
+            </p>
+
+            <div class="modal_allergens">
+              <strong>Allergens:</strong> <span id="quickview-allergens">Gluten, Dairy, Soy</span>
+            </div>
+
+            <div class="modal_quantity-wrapper">
+              <span class="modal_label">Quantity:</span>
+              <div class="quantity_selector">
+                <button class="quantity_btn" id="quickview-qty-minus" aria-label="Decrease quantity">
+                  <i class="ri-subtract-line"></i>
+                </button>
+                <span class="quantity_value" id="quickview-qty">1</span>
+                <button class="quantity_btn" id="quickview-qty-plus" aria-label="Increase quantity">
+                  <i class="ri-add-line"></i>
+                </button>
+              </div>
+              <span class="modal_subtotal" id="quickview-total">Total: $5.99</span>
+            </div>
+
+            <div class="modal_actions">
+              <button class="button modal_add-cart" id="quickview-add-cart">
+                Add to Cart <i class="ri-shopping-bag-3-line"></i>
+              </button>
+              <button class="button-icon modal_wishlist-btn" id="quickview-wishlist" aria-label="Add to wishlist" title="Save to wishlist">
+                <i class="ri-heart-line" id="quickview-wishlist-icon"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!--========== SCROLL UP ==========-->
     <a href="#" class="scrollup" id="scroll-up">
