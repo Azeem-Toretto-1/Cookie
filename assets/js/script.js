@@ -636,11 +636,125 @@ const PRODUCTS_DATA = [
 
 const getProductById = (id) => PRODUCTS_DATA.find((item) => item.id === id);
 
+/*=============== 2. LOCAL STORAGE MANAGERS ===============*/
+const STORAGE_KEYS = {
+  CART: "cookie_cart_v1",
+};
+
+const safeJSONParse = (str, fallback) => {
+  try {
+    const parsed = JSON.parse(str);
+    return parsed !== null && parsed !== undefined ? parsed : fallback;
+  } catch (err) {
+    console.warn("LocalStorage parse error:", err);
+    return fallback;
+  }
+};
+
+const loadCart = () => safeJSONParse(localStorage.getItem(STORAGE_KEYS.CART), []);
+const saveCart = (cartData) => {
+  try {
+    localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cartData));
+  } catch (err) {
+    console.error("Cart save error:", err);
+  }
+};
+
 /* State Variables */
+let cart = loadCart();
 let currentQuickViewProduct = null;
 let quickViewQuantity = 1;
 
-/*=============== 2. QUICK VIEW MODAL ===============*/
+/*=============== 3. TOAST NOTIFICATION SYSTEM ===============*/
+const showToast = ({ title, message, image, icon = "ri-check-line" }) => {
+  const container = document.getElementById("toast-container");
+  if (!container) return;
+
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.setAttribute("role", "alert");
+  toast.innerHTML = `
+    ${image ? `<img src="${image}" alt="" class="toast_img">` : `<i class="${icon} toast_icon"></i>`}
+    <div class="toast_content">
+      <div class="toast_title">${title}</div>
+      <div class="toast_message">${message}</div>
+    </div>
+    <button type="button" class="toast_close" aria-label="Dismiss notification">&times;</button>
+  `;
+
+  container.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.classList.add("show");
+  });
+
+  const dismiss = () => {
+    toast.classList.remove("show");
+    setTimeout(() => {
+      if (toast.parentElement) toast.remove();
+    }, 350);
+  };
+
+  toast.querySelector(".toast_close").addEventListener("click", dismiss);
+  setTimeout(dismiss, 3800);
+};
+
+/*=============== 4. FLYING PRODUCT ANIMATION ===============*/
+const triggerFlyToCart = (sourceElement, imageSrc) => {
+  const cartBtn = document.getElementById("cart-btn");
+  if (!sourceElement || !cartBtn || !imageSrc) return;
+
+  const sourceRect = sourceElement.getBoundingClientRect();
+  const targetRect = cartBtn.getBoundingClientRect();
+
+  const flyImg = document.createElement("img");
+  flyImg.src = imageSrc;
+  flyImg.className = "flying_cookie_clone";
+  const startSize = Math.max(50, Math.min(sourceRect.width || 80, 100));
+  flyImg.style.width = `${startSize}px`;
+  flyImg.style.height = `${startSize}px`;
+  flyImg.style.left = `${sourceRect.left + sourceRect.width / 2 - startSize / 2}px`;
+  flyImg.style.top = `${sourceRect.top + sourceRect.height / 2 - startSize / 2}px`;
+  document.body.appendChild(flyImg);
+
+  const deltaX = targetRect.left + targetRect.width / 2 - (sourceRect.left + sourceRect.width / 2);
+  const deltaY = targetRect.top + targetRect.height / 2 - (sourceRect.top + sourceRect.height / 2);
+
+  if (window.gsap) {
+    gsap.to(flyImg, {
+      x: deltaX,
+      y: deltaY,
+      scale: 0.22,
+      rotation: 360,
+      opacity: 0.5,
+      duration: 0.85,
+      ease: "power2.inOut",
+      onComplete: () => {
+        flyImg.remove();
+        bounceBadge(document.getElementById("cart-badge"));
+      },
+    });
+  } else {
+    setTimeout(() => flyImg.remove(), 600);
+  }
+};
+
+const bounceBadge = (badge) => {
+  if (!badge) return;
+  badge.classList.add("badge-bounce");
+  setTimeout(() => badge.classList.remove("badge-bounce"), 350);
+};
+
+const updateCartBadge = () => {
+  const badge = document.getElementById("cart-badge");
+  const countPill = document.getElementById("cart-drawer-count");
+  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+
+  if (badge) badge.textContent = totalItems;
+  if (countPill) countPill.textContent = `${totalItems} ${totalItems === 1 ? "item" : "items"}`;
+};
+
+/*=============== 5. QUICK VIEW MODAL ===============*/
 const quickViewModal = document.getElementById("quickview-modal");
 const quickViewClose = document.getElementById("quickview-close");
 const quickViewOverlay = document.getElementById("quickview-overlay");
@@ -707,18 +821,243 @@ if (quickViewQtyPlus) {
   });
 }
 
+if (quickViewAddCart) {
+  quickViewAddCart.addEventListener("click", () => {
+    if (!currentQuickViewProduct) return;
+    const modalImg = document.getElementById("quickview-img");
+    triggerFlyToCart(modalImg, currentQuickViewProduct.image);
+    addToCart(currentQuickViewProduct.id, quickViewQuantity);
+    showToast({
+      title: currentQuickViewProduct.name,
+      message: `Added ${quickViewQuantity} to your cart!`,
+      image: currentQuickViewProduct.image,
+    });
+    closeQuickView();
+  });
+}
+
 if (quickViewClose) quickViewClose.addEventListener("click", closeQuickView);
 if (quickViewOverlay) quickViewOverlay.addEventListener("click", closeQuickView);
 
-// Escape key to close modal
+/*=============== 6. SHOPPING CART SYSTEM ===============*/
+const cartDrawer = document.getElementById("cart-drawer");
+const cartClose = document.getElementById("cart-close");
+const cartOverlay = document.getElementById("cart-overlay");
+const cartItemsContainer = document.getElementById("cart-items");
+const cartEmptyState = document.getElementById("cart-empty");
+const cartFooter = document.getElementById("cart-footer");
+const cartSubtotalEl = document.getElementById("cart-subtotal");
+const cartTotalEl = document.getElementById("cart-total");
+const cartCheckoutBtn = document.getElementById("cart-checkout-btn");
+const cartEmptyShopBtn = document.getElementById("cart-empty-shop");
+const headerCartBtn = document.getElementById("cart-btn");
+
+const openCart = () => {
+  renderCart();
+  cartDrawer.classList.add("show");
+  document.body.classList.add("modal-open");
+};
+
+const closeCart = () => {
+  cartDrawer.classList.remove("show");
+  if (!document.querySelector(".modal.show, .drawer.show:not(#cart-drawer)")) {
+    document.body.classList.remove("modal-open");
+  }
+};
+
+const addToCart = (productId, quantity = 1, customBoxData = null) => {
+  if (customBoxData) {
+    const boxCartItem = {
+      cartItemId: `box-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      isCustomBox: true,
+      name: `Custom Cookie Box (${customBoxData.size} Pack)`,
+      details: customBoxData.details,
+      price: customBoxData.price,
+      quantity: 1,
+      image: "./assets/img/home-bag.png",
+    };
+    cart.push(boxCartItem);
+  } else {
+    const product = getProductById(productId);
+    if (!product) return;
+
+    const existingItem = cart.find(
+      (item) => !item.isCustomBox && item.productId === productId
+    );
+
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      cart.push({
+        cartItemId: `item-${product.id}`,
+        productId: product.id,
+        isCustomBox: false,
+        name: product.name,
+        price: product.price,
+        quantity: quantity,
+        image: product.image,
+      });
+    }
+  }
+
+  saveCart(cart);
+  updateCartBadge();
+  if (cartDrawer && cartDrawer.classList.contains("show")) {
+    renderCart();
+  }
+};
+
+const updateCartItemQuantity = (cartItemId, newQuantity) => {
+  const itemIndex = cart.findIndex((item) => item.cartItemId === cartItemId);
+  if (itemIndex === -1) return;
+
+  if (newQuantity <= 0) {
+    const removedItem = cart[itemIndex];
+    cart.splice(itemIndex, 1);
+    showToast({
+      title: removedItem.name,
+      message: "Item removed from cart",
+      image: removedItem.image,
+    });
+  } else {
+    cart[itemIndex].quantity = newQuantity;
+  }
+
+  saveCart(cart);
+  updateCartBadge();
+  renderCart();
+};
+
+const removeCartItem = (cartItemId) => {
+  const itemIndex = cart.findIndex((item) => item.cartItemId === cartItemId);
+  if (itemIndex === -1) return;
+
+  const removedItem = cart[itemIndex];
+  cart.splice(itemIndex, 1);
+  saveCart(cart);
+  updateCartBadge();
+  renderCart();
+
+  showToast({
+    title: removedItem.name,
+    message: "Removed from your cart",
+    image: removedItem.image,
+  });
+};
+
+const renderCart = () => {
+  if (!cartItemsContainer) return;
+
+  if (cart.length === 0) {
+    cartEmptyState.style.display = "flex";
+    cartItemsContainer.style.display = "none";
+    cartFooter.style.display = "none";
+    return;
+  }
+
+  cartEmptyState.style.display = "none";
+  cartItemsContainer.style.display = "flex";
+  cartFooter.style.display = "block";
+
+  cartItemsContainer.innerHTML = "";
+  let subtotal = 0;
+
+  cart.forEach((item) => {
+    const itemTotal = item.price * item.quantity;
+    subtotal += itemTotal;
+
+    const itemEl = document.createElement("div");
+    itemEl.className = "drawer_item";
+    itemEl.innerHTML = `
+      <img src="${item.image}" alt="${item.name}" class="drawer_item-img">
+      <div class="drawer_item-info">
+        <h4 class="drawer_item-title">${item.name}</h4>
+        ${item.isCustomBox ? `<p class="drawer_item-desc">${item.details}</p>` : ""}
+        <span class="drawer_item-price">$ ${item.price.toFixed(2)}</span>
+        
+        <div class="drawer_item-stepper">
+          <button type="button" class="stepper_btn" data-action="decrease" data-id="${item.cartItemId}" aria-label="Decrease quantity">
+            <i class="ri-subtract-line"></i>
+          </button>
+          <span class="stepper_count">${item.quantity}</span>
+          <button type="button" class="stepper_btn" data-action="increase" data-id="${item.cartItemId}" aria-label="Increase quantity">
+            <i class="ri-add-line"></i>
+          </button>
+        </div>
+      </div>
+      <button type="button" class="drawer_item-remove" data-action="remove" data-id="${item.cartItemId}" title="Remove item" aria-label="Remove item">
+        <i class="ri-delete-bin-line"></i>
+      </button>
+    `;
+    cartItemsContainer.appendChild(itemEl);
+  });
+
+  const formattedSubtotal = `$ ${subtotal.toFixed(2)}`;
+  if (cartSubtotalEl) cartSubtotalEl.textContent = formattedSubtotal;
+  if (cartTotalEl) cartTotalEl.textContent = formattedSubtotal;
+};
+
+if (cartItemsContainer) {
+  cartItemsContainer.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+
+    const action = btn.dataset.action;
+    const cartItemId = btn.dataset.id;
+    if (!action || !cartItemId) return;
+
+    const currentItem = cart.find((item) => item.cartItemId === cartItemId);
+    if (!currentItem) return;
+
+    if (action === "decrease") {
+      updateCartItemQuantity(cartItemId, currentItem.quantity - 1);
+    } else if (action === "increase") {
+      updateCartItemQuantity(cartItemId, currentItem.quantity + 1);
+    } else if (action === "remove") {
+      removeCartItem(cartItemId);
+    }
+  });
+}
+
+if (headerCartBtn) headerCartBtn.addEventListener("click", openCart);
+if (cartClose) cartClose.addEventListener("click", closeCart);
+if (cartOverlay) cartOverlay.addEventListener("click", closeCart);
+if (cartEmptyShopBtn) {
+  cartEmptyShopBtn.addEventListener("click", () => {
+    closeCart();
+  });
+}
+
+// Escape key to close modal & drawer
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     closeQuickView();
+    closeCart();
   }
 });
 
-// Click delegation to trigger Quick View
+// Click delegation
 document.addEventListener("click", (e) => {
+  const addBtn = e.target.closest(".products_add");
+  if (addBtn) {
+    e.stopPropagation();
+    const productId = addBtn.getAttribute("data-product-id");
+    const product = getProductById(productId);
+    if (!product) return;
+
+    const card = addBtn.closest(".products_card");
+    const img = card ? card.querySelector(".products_img") : null;
+    triggerFlyToCart(img, product.image);
+
+    addToCart(productId, 1);
+    showToast({
+      title: product.name,
+      message: "Added to your cart!",
+      image: product.image,
+    });
+    return;
+  }
+
   const qvBtn = e.target.closest(".products_quick-btn, .featured_button");
   if (qvBtn) {
     e.stopPropagation();
@@ -735,4 +1074,8 @@ document.addEventListener("click", (e) => {
       if (productId) openQuickView(productId);
     }
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateCartBadge();
 });

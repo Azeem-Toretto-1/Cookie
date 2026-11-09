@@ -100,10 +100,18 @@
           </button>
         </div>
 
-        <!-- Toggle button -->
-        <button class="nav_toggle" id="nav-toggle" aria-label="Toggle menu">
-          <i class="ri-menu-fill"></i>
-        </button>
+        <!-- Header Actions -->
+        <div class="nav_actions">
+          <button class="nav_action-btn" id="cart-btn" aria-label="View shopping cart" title="Cart">
+            <i class="ri-shopping-bag-3-line"></i>
+            <span class="nav_badge" id="cart-badge">0</span>
+          </button>
+
+          <!-- Toggle button -->
+          <button class="nav_toggle" id="nav-toggle" aria-label="Toggle menu">
+            <i class="ri-menu-fill"></i>
+          </button>
+        </div>
       </nav>
     </header>
 
@@ -698,6 +706,60 @@
         </div>
       </div>
     </div>
+
+    <!--==================== CART DRAWER ====================-->
+    <div class="drawer" id="cart-drawer" aria-hidden="true">
+      <div class="drawer_overlay" id="cart-overlay"></div>
+      <aside class="drawer_panel">
+        <div class="drawer_header">
+          <div class="drawer_title-group">
+            <h2 class="drawer_title"><i class="ri-shopping-bag-3-fill"></i> Your Cart</h2>
+            <span class="drawer_count-pill" id="cart-drawer-count">0 items</span>
+          </div>
+          <button class="drawer_close" id="cart-close" aria-label="Close cart">
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+
+        <!-- Empty state -->
+        <div class="drawer_empty" id="cart-empty">
+          <div class="drawer_empty-icon">
+            <i class="ri-shopping-bag-line"></i>
+          </div>
+          <h3 class="drawer_empty-title">Your cart is empty</h3>
+          <p class="drawer_empty-desc">Looks like you haven't added any fresh cookies yet. Warm up your day with our artisanal selection!</p>
+          <a href="#products" class="button drawer_empty-btn" id="cart-empty-shop">
+            Explore Menu <i class="ri-arrow-right-line"></i>
+          </a>
+        </div>
+
+        <!-- Cart items list -->
+        <div class="drawer_items" id="cart-items"></div>
+
+        <!-- Cart footer -->
+        <div class="drawer_footer" id="cart-footer">
+          <div class="drawer_summary-row">
+            <span>Subtotal</span>
+            <span class="drawer_subtotal-val" id="cart-subtotal">$0.00</span>
+          </div>
+          <div class="drawer_summary-row">
+            <span>Delivery</span>
+            <span class="drawer_free-shipping">Free (Lima)</span>
+          </div>
+          <div class="drawer_summary-row drawer_summary-total">
+            <span>Total</span>
+            <span class="drawer_total-val" id="cart-total">$0.00</span>
+          </div>
+
+          <button class="button drawer_checkout-btn" id="cart-checkout-btn">
+            Proceed to Checkout <i class="ri-arrow-right-line"></i>
+          </button>
+        </div>
+      </aside>
+    </div>
+
+    <!--==================== TOAST CONTAINER ====================-->
+    <div class="toast_container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
     <!--========== SCROLL UP ==========-->
     <a href="#" class="scrollup" id="scroll-up">
