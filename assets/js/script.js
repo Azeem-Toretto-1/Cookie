@@ -677,6 +677,7 @@ const getProductById = (id) => PRODUCTS_DATA.find((item) => item.id === id);
 const STORAGE_KEYS = {
   CART: "cookie_cart_v1",
   WISHLIST: "cookie_wishlist_v1",
+  ORDER: "cookie_last_order_v1",
 };
 
 const safeJSONParse = (str, fallback) => {
@@ -704,6 +705,15 @@ const saveWishlist = (wishlistData) => {
     localStorage.setItem(STORAGE_KEYS.WISHLIST, JSON.stringify(wishlistData));
   } catch (err) {
     console.error("Wishlist save error:", err);
+  }
+};
+
+const loadLastOrder = () => safeJSONParse(localStorage.getItem(STORAGE_KEYS.ORDER), null);
+const saveLastOrder = (orderData) => {
+  try {
+    localStorage.setItem(STORAGE_KEYS.ORDER, JSON.stringify(orderData));
+  } catch (err) {
+    console.error("Order save error:", err);
   }
 };
 
@@ -1526,12 +1536,228 @@ if (boxAddCartBtn) {
   });
 }
 
+/*=============== 10. CHECKOUT & ORDER COMPLETION ===============*/
+const checkoutModal = document.getElementById("checkout-modal");
+const checkoutClose = document.getElementById("checkout-close");
+const checkoutOverlay = document.getElementById("checkout-overlay");
+const checkoutForm = document.getElementById("checkout-form");
+const checkoutSummaryItems = document.getElementById("checkout-summary-items");
+const checkoutSubtotal = document.getElementById("checkout-subtotal");
+const checkoutTotal = document.getElementById("checkout-total");
+const placeOrderBtn = document.getElementById("place-order-btn");
+
+const orderConfirmModal = document.getElementById("order-confirm-modal");
+const orderConfirmClose = document.getElementById("order-confirm-close");
+const orderConfirmOverlay = document.getElementById("order-confirm-overlay");
+const confirmContinueBtn = document.getElementById("confirm-continue-btn");
+
+const openCheckout = () => {
+  if (cart.length === 0) {
+    showToast({
+      title: "Cart is empty",
+      message: "Add some cookies before checking out!",
+      icon: "ri-error-warning-line",
+    });
+    return;
+  }
+
+  closeCart();
+  renderCheckoutSummary();
+  checkoutModal.classList.add("show");
+  document.body.classList.add("modal-open");
+};
+
+const closeCheckout = () => {
+  checkoutModal.classList.remove("show");
+  if (!document.querySelector(".modal.show:not(#checkout-modal), .drawer.show")) {
+    document.body.classList.remove("modal-open");
+  }
+};
+
+const renderCheckoutSummary = () => {
+  if (!checkoutSummaryItems) return;
+  checkoutSummaryItems.innerHTML = "";
+
+  let subtotal = 0;
+  cart.forEach((item) => {
+    const itemTotal = item.price * item.quantity;
+    subtotal += itemTotal;
+
+    const row = document.createElement("div");
+    row.className = "checkout_summary-item";
+    row.innerHTML = `
+      <span class="checkout_summary-item-name">${item.quantity}x ${item.name}</span>
+      <span class="checkout_summary-item-price">$ ${itemTotal.toFixed(2)}</span>
+    `;
+    checkoutSummaryItems.appendChild(row);
+  });
+
+  const formatted = `$ ${subtotal.toFixed(2)}`;
+  if (checkoutSubtotal) checkoutSubtotal.textContent = formatted;
+  if (checkoutTotal) checkoutTotal.textContent = formatted;
+};
+
+if (cartCheckoutBtn) {
+  cartCheckoutBtn.addEventListener("click", openCheckout);
+}
+if (checkoutClose) checkoutClose.addEventListener("click", closeCheckout);
+if (checkoutOverlay) checkoutOverlay.addEventListener("click", closeCheckout);
+
+const validateField = (inputEl, errorEl, validator, errorMsg) => {
+  const value = inputEl.value.trim();
+  const isValid = validator(value);
+  if (!isValid) {
+    inputEl.classList.add("input-error");
+    if (errorEl) errorEl.textContent = errorMsg;
+    return false;
+  } else {
+    inputEl.classList.remove("input-error");
+    if (errorEl) errorEl.textContent = "";
+    return true;
+  }
+};
+
+if (checkoutForm) {
+  const nameInput = document.getElementById("checkout-name");
+  const emailInput = document.getElementById("checkout-email");
+  const phoneInput = document.getElementById("checkout-phone");
+  const addressInput = document.getElementById("checkout-address");
+  const cityInput = document.getElementById("checkout-city");
+  const postalInput = document.getElementById("checkout-postal");
+
+  nameInput?.addEventListener("blur", () => {
+    validateField(nameInput, document.getElementById("error-name"), (v) => v.length >= 2, "Please enter your full name");
+  });
+  emailInput?.addEventListener("blur", () => {
+    validateField(emailInput, document.getElementById("error-email"), (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), "Please enter a valid email address");
+  });
+  phoneInput?.addEventListener("blur", () => {
+    validateField(phoneInput, document.getElementById("error-phone"), (v) => v.replace(/\D/g, "").length >= 7, "Please enter a valid phone number");
+  });
+  addressInput?.addEventListener("blur", () => {
+    validateField(addressInput, document.getElementById("error-address"), (v) => v.length >= 5, "Please enter your delivery street address");
+  });
+  cityInput?.addEventListener("blur", () => {
+    validateField(cityInput, document.getElementById("error-city"), (v) => v.length >= 2, "Please enter city");
+  });
+  postalInput?.addEventListener("blur", () => {
+    validateField(postalInput, document.getElementById("error-postal"), (v) => v.length >= 3, "Please enter a valid postal code");
+  });
+
+  checkoutForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const isNameValid = validateField(nameInput, document.getElementById("error-name"), (v) => v.length >= 2, "Please enter your full name");
+    const isEmailValid = validateField(emailInput, document.getElementById("error-email"), (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), "Please enter a valid email address");
+    const isPhoneValid = validateField(phoneInput, document.getElementById("error-phone"), (v) => v.replace(/\D/g, "").length >= 7, "Please enter a valid phone number");
+    const isAddressValid = validateField(addressInput, document.getElementById("error-address"), (v) => v.length >= 5, "Please enter your delivery street address");
+    const isCityValid = validateField(cityInput, document.getElementById("error-city"), (v) => v.length >= 2, "Please enter city");
+    const isPostalValid = validateField(postalInput, document.getElementById("error-postal"), (v) => v.length >= 3, "Please enter a valid postal code");
+
+    if (!isNameValid || !isEmailValid || !isPhoneValid || !isAddressValid || !isCityValid || !isPostalValid) {
+      return;
+    }
+
+    placeOrderBtn.disabled = true;
+    placeOrderBtn.innerHTML = `Baking your order... <i class="ri-loader-4-line"></i>`;
+
+    setTimeout(() => {
+      placeOrderBtn.disabled = false;
+      placeOrderBtn.innerHTML = `Place Order <i class="ri-check-line"></i>`;
+
+      const orderId = `#CK-${Math.floor(10000 + Math.random() * 90000)}`;
+      const orderDate = new Date().toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      const customerInfo = {
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        address: addressInput.value.trim(),
+        city: cityInput.value.trim(),
+        postal: postalInput.value.trim(),
+        notes: document.getElementById("checkout-notes")?.value.trim() || "",
+      };
+
+      const finalSubtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+      const completedOrder = {
+        id: orderId,
+        date: orderDate,
+        customer: customerInfo,
+        items: [...cart],
+        subtotal: finalSubtotal,
+        total: finalSubtotal,
+      };
+
+      saveLastOrder(completedOrder);
+
+      cart = [];
+      saveCart(cart);
+      updateCartBadge();
+
+      closeCheckout();
+      openOrderConfirmation(completedOrder);
+
+      showToast({
+        title: "Order Placed!",
+        message: `Order ${orderId} has been simulated successfully!`,
+        icon: "ri-check-double-line",
+      });
+    }, 800);
+  });
+}
+
+const openOrderConfirmation = (orderData) => {
+  if (!orderConfirmModal || !orderData) return;
+
+  document.getElementById("confirm-order-id").textContent = orderData.id;
+  document.getElementById("confirm-order-date").textContent = orderData.date;
+  document.getElementById("confirm-customer-name").textContent = orderData.customer.name;
+  document.getElementById("confirm-customer-address").textContent = `${orderData.customer.address}, ${orderData.customer.city}`;
+  document.getElementById("confirm-total-amount").textContent = `$ ${orderData.total.toFixed(2)}`;
+
+  const itemsContainer = document.getElementById("confirm-items-list");
+  if (itemsContainer) {
+    itemsContainer.innerHTML = "";
+    orderData.items.forEach((item) => {
+      const row = document.createElement("div");
+      row.className = "order_item-row";
+      row.innerHTML = `
+        <span>${item.quantity}x ${item.name}</span>
+        <strong>$ ${(item.price * item.quantity).toFixed(2)}</strong>
+      `;
+      itemsContainer.appendChild(row);
+    });
+  }
+
+  orderConfirmModal.classList.add("show");
+  document.body.classList.add("modal-open");
+};
+
+const closeOrderConfirmation = () => {
+  if (!orderConfirmModal) return;
+  orderConfirmModal.classList.remove("show");
+  document.body.classList.remove("modal-open");
+};
+
+if (orderConfirmClose) orderConfirmClose.addEventListener("click", closeOrderConfirmation);
+if (orderConfirmOverlay) orderConfirmOverlay.addEventListener("click", closeOrderConfirmation);
+if (confirmContinueBtn) confirmContinueBtn.addEventListener("click", closeOrderConfirmation);
+
 // Escape key to close modal & drawer
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     closeQuickView();
     closeCart();
     closeWishlist();
+    closeCheckout();
+    closeOrderConfirmation();
   }
 });
 

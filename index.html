@@ -894,6 +894,157 @@
       </aside>
     </div>
 
+    <!--==================== CHECKOUT MODAL ====================-->
+    <div class="modal" id="checkout-modal" aria-hidden="true" role="dialog" aria-labelledby="checkout-modal-title">
+      <div class="modal_overlay" id="checkout-overlay"></div>
+      <div class="modal_container modal_container--checkout">
+        <button class="modal_close" id="checkout-close" aria-label="Close checkout">
+          <i class="ri-close-line"></i>
+        </button>
+
+        <div class="checkout_wrapper">
+          <div class="checkout_form-col">
+            <h2 class="modal_title" id="checkout-modal-title">Checkout</h2>
+            <p class="checkout_subtitle">Enter your delivery details to place your artisan cookie order.</p>
+
+            <form class="checkout_form" id="checkout-form" novalidate>
+              <div class="form_group">
+                <label for="checkout-name" class="form_label">Full Name *</label>
+                <input type="text" id="checkout-name" name="name" class="form_input" placeholder="e.g. Sofia Ramirez" required autocomplete="name" />
+                <span class="form_error" id="error-name"></span>
+              </div>
+
+              <div class="form_row">
+                <div class="form_group">
+                  <label for="checkout-email" class="form_label">Email Address *</label>
+                  <input type="email" id="checkout-email" name="email" class="form_input" placeholder="sofia@example.com" required autocomplete="email" />
+                  <span class="form_error" id="error-email"></span>
+                </div>
+
+                <div class="form_group">
+                  <label for="checkout-phone" class="form_label">Phone Number *</label>
+                  <input type="tel" id="checkout-phone" name="phone" class="form_input" placeholder="+51 987 654 321" required autocomplete="tel" />
+                  <span class="form_error" id="error-phone"></span>
+                </div>
+              </div>
+
+              <div class="form_group">
+                <label for="checkout-address" class="form_label">Delivery Address *</label>
+                <input type="text" id="checkout-address" name="address" class="form_input" placeholder="Av. Larco 456, Apt 3B" required autocomplete="street-address" />
+                <span class="form_error" id="error-address"></span>
+              </div>
+
+              <div class="form_row">
+                <div class="form_group">
+                  <label for="checkout-city" class="form_label">City *</label>
+                  <input type="text" id="checkout-city" name="city" class="form_input" placeholder="Lima" required autocomplete="address-level2" value="Lima" />
+                  <span class="form_error" id="error-city"></span>
+                </div>
+
+                <div class="form_group">
+                  <label for="checkout-postal" class="form_label">Postal Code *</label>
+                  <input type="text" id="checkout-postal" name="postal" class="form_input" placeholder="15074" required autocomplete="postal-code" />
+                  <span class="form_error" id="error-postal"></span>
+                </div>
+              </div>
+
+              <div class="form_group">
+                <label for="checkout-notes" class="form_label">Order Notes (Optional)</label>
+                <textarea id="checkout-notes" name="notes" class="form_textarea" placeholder="Special delivery instructions, gate code, or gift note..."></textarea>
+              </div>
+
+              <div class="checkout_notice">
+                <i class="ri-information-line"></i>
+                <span>This is a frontend demonstration order. No actual payment card is needed.</span>
+              </div>
+
+              <button type="submit" class="button checkout_submit-btn" id="place-order-btn">
+                Place Order <i class="ri-check-line"></i>
+              </button>
+            </form>
+          </div>
+
+          <div class="checkout_summary-col">
+            <h3 class="checkout_summary-title">Order Summary</h3>
+            <div class="checkout_summary-items" id="checkout-summary-items"></div>
+
+            <div class="checkout_summary-totals">
+              <div class="summary_row">
+                <span>Subtotal</span>
+                <span id="checkout-subtotal">$0.00</span>
+              </div>
+              <div class="summary_row">
+                <span>Delivery</span>
+                <span class="summary_free">FREE</span>
+              </div>
+              <div class="summary_row summary_total">
+                <span>Total to Pay</span>
+                <span id="checkout-total">$0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--==================== ORDER CONFIRMATION MODAL ====================-->
+    <div class="modal" id="order-confirm-modal" aria-hidden="true" role="dialog" aria-labelledby="order-confirm-title">
+      <div class="modal_overlay" id="order-confirm-overlay"></div>
+      <div class="modal_container modal_container--confirm">
+        <button class="modal_close" id="order-confirm-close" aria-label="Close modal">
+          <i class="ri-close-line"></i>
+        </button>
+
+        <div class="order_confirm-content">
+          <div class="order_confirm-badge">
+            <i class="ri-check-double-line"></i>
+          </div>
+          <span class="section_subtitle">Order Confirmed!</span>
+          <h2 class="modal_title" id="order-confirm-title">Thank You For Your Order!</h2>
+          <p class="order_confirm-lead">
+            We've received your request and our bakers are warming up the ovens!
+          </p>
+
+          <div class="order_details-card">
+            <div class="order_meta-grid">
+              <div>
+                <span class="order_label">Order ID:</span>
+                <strong class="order_value" id="confirm-order-id">#CK-00000</strong>
+              </div>
+              <div>
+                <span class="order_label">Date & Time:</span>
+                <span class="order_value" id="confirm-order-date">Nov 9, 2026</span>
+              </div>
+              <div>
+                <span class="order_label">Recipient:</span>
+                <span class="order_value" id="confirm-customer-name">Sofia Ramirez</span>
+              </div>
+              <div>
+                <span class="order_label">Delivery To:</span>
+                <span class="order_value" id="confirm-customer-address">Av. Larco 456, Lima</span>
+              </div>
+            </div>
+
+            <h4 class="order_items-title">Purchased Items:</h4>
+            <div class="order_items-list" id="confirm-items-list"></div>
+
+            <div class="order_total-row">
+              <span>Total Paid (Simulated):</span>
+              <strong id="confirm-total-amount">$0.00</strong>
+            </div>
+          </div>
+
+          <p class="order_simulation-note">
+            <i class="ri-information-line"></i> Frontend portfolio demonstration only. No real payment or delivery request was transmitted.
+          </p>
+
+          <button class="button order_continue-btn" id="confirm-continue-btn">
+            Continue Shopping <i class="ri-arrow-right-line"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!--==================== TOAST CONTAINER ====================-->
     <div class="toast_container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
