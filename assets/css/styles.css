@@ -1231,6 +1231,13 @@ img {
   transform: scale(1.1);
 }
 
+.products_more:disabled,
+.products_more[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /*=============== MODALS BASE & QUICK VIEW ===============*/
 .modal {
   position: fixed;
